@@ -1,3 +1,5 @@
+import path from 'path'
+
 const config = {
   projectName: 'jiangs-blog-mini-taro',
   date: '2023-4-9',
@@ -9,7 +11,16 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+  plugins: ['@tarojs/plugin-html'],
+  sass:{
+    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
+  },
+  alias: {
+    '@/': path.resolve(__dirname, '..', 'src/'),
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/common': path.resolve(__dirname, '..', 'src/common'),
+    '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+  },
   defineConstants: {
   },
   copy: {
@@ -28,7 +39,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-
+          selectorBlackList: ['nut-']
         }
       },
       url: {
