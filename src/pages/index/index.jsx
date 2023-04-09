@@ -19,7 +19,7 @@ export default class Index extends Component {
     return (
       <View className='index'>
         <Text>Hello world!</Text>
-        <Button type="primary" className='btn'>主要按钮</Button>
+        <Button type='primary' className='btn'>主要按钮</Button>
       </View>
     )
   }

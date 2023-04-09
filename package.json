@@ -53,8 +53,11 @@
     "@tarojs/shared": "3.6.4",
     "@tarojs/taro": "3.6.4",
     "babel-plugin-import": "^1.13.6",
+    "dva-core": "^2.0.4",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
