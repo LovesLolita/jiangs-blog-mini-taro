@@ -1,7 +1,16 @@
 /* eslint-disable */
+import Taro from '@tarojs/taro'
 import { Component, useEffect, useState } from "react";
 import { View, Text, Swiper, SwiperItem, ScrollView } from "@tarojs/components";
-import { Tabs, Divider, Empty, Button } from "@nutui/nutui-react-taro";
+import {
+  Tabs,
+  Divider,
+  Empty,
+  Button,
+  Row,
+  Col,
+  Icon,
+} from "@nutui/nutui-react-taro";
 import tools from "@/common/tools";
 import API from "@/api";
 import "./index.scss";
@@ -30,6 +39,41 @@ const Index = () => {
   }, []);
 
   /* 首页轮播图 */
+
+  /* 首页文章列表 */
+
+  const [latestArticles, setLatestArticles] = useState([]);
+
+  const onScrollToLower = () => {
+    getLatestArticles(false);
+  };
+
+  const getLatestArticles = async (refresh) => {
+    try {
+      let offset = 0;
+      if (!refresh) {
+        offset = latestArticles.length;
+      }
+      let params = {
+        offset: offset,
+      };
+      const res = await API.JIANGQIE_POSTS_LAST(params);
+      console.log(res);
+      if (res.code === 0) {
+        setLatestArticles([...latestArticles, ...res.data]);
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+      
+    }
+  };
+
+  useEffect(() => {
+    getLatestArticles();
+  }, []);
+  /* 首页文章列表end */
 
   return (
     <View className="page_index">
@@ -62,31 +106,67 @@ const Index = () => {
             >
               最新文章
             </Divider>
-                {
-                  /* <View className='empty'>
-                    <Empty image='network' description='无最新文章'>
+            {(() => {
+              if (latestArticles.length === 0) {
+                return (
+                  <View className="empty">
+                    <Empty image="network" description="无最新文章">
                       <div style={{ marginTop: "10px" }}>
-                        <Button icon='refresh' type='primary'>
+                        <Button
+                          icon="refresh"
+                          type="primary"
+                          onClick={()=> getLatestArticles("refresh")}
+                        >
                           亲,请重试一下
                         </Button>
                       </div>
                     </Empty>
-                  </View> */
-                }
-               
-            <ScrollView
-            className='scroll_view'
-            scrollY
-            scrollWithAnimation
-            scrollTop={0}
-            >
-              <View className="articles_content"></View>
-              <View className="articles_content"></View>
-              <View className="articles_content"></View>
-              <View className="articles_content"></View>
-              <View className="articles_content"></View>
-              <View className="articles_content"></View>
-            </ScrollView>
+                  </View>
+                );
+              } else {
+                return (
+                  <ScrollView
+                    className="scroll_view"
+                    scrollY
+                    scrollWithAnimation
+                    scrollAnchoring
+                    scrollTop={0}
+                    onRefresherRefresh={(e) => getLatestArticles( "refresh",e)}
+                    onScrollToLower={onScrollToLower}
+                  >
+                    {latestArticles.map((item, index) => {
+                      return (
+                        <View className="articles_content" key={index}>
+                          <Row>
+                            <Col span="14">
+                              <View className="left_text_box">
+                                <View className="left_title">{item.title}</View>
+                                <View className="left_content">
+                                  {item.excerpt}
+                                </View>
+                                <View
+                                  className="left_content"
+                                  style={{ textAlign: "left" }}
+                                >
+                                  {item.time}
+                                  <Icon name="eye" className="left_icon"></Icon>
+                                  {item.views}
+                                </View>
+                              </View>
+                            </Col>
+                            <Col span="10">
+                              <View className="image_box">
+                                <img src={item.thumbnail} alt="" />
+                              </View>
+                            </Col>
+                          </Row>
+                        </View>
+                      );
+                    })}
+                  </ScrollView>
+                );
+              }
+            })()}
           </View>
         </Tabs.TabPane>
       </Tabs>
