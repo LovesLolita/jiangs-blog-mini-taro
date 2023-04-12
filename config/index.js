@@ -16,9 +16,11 @@ const config = {
     data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
   },
   alias: {
-    '@/': path.resolve(__dirname, '..', 'src/'),
+    '@/store': path.resolve(__dirname, '..', 'src/store'),
+    '@/assets': path.resolve(__dirname, '..', 'src/assets'),
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/common': path.resolve(__dirname, '..', 'src/common'),
+    '@/api': path.resolve(__dirname, '..', 'src/api'),
     '@/pages': path.resolve(__dirname, '..', 'src/pages'),
   },
   defineConstants: {

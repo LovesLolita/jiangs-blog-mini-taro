@@ -1,26 +1,67 @@
-import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import { Button } from '@nutui/nutui-react-taro';
-import './index.scss'
+import { Component, useEffect, useState } from "react";
+import { View, Text,Swiper, SwiperItem } from "@tarojs/components";
+import { Tabs } from "@nutui/nutui-react-taro";
+import tools from "@/common/tools";
+import API from "@/api";
+import "./index.scss";
 
-export default class Index extends Component {
+const Index = () => {
+  /* 首页轮播图 */
+  const [initPage, setInitPage] = useState(0);
+  const [swiperList, setSwiperList] = useState([]);
 
-  componentWillMount () { }
+  const getSwiperInfo = async () => {
+    try {
+      const res = await API.JIANGQIE_SETTING_LUNBOTU();
+      console.log(res);
+      if (res?.code === 0) {
+        setSwiperList(res?.data?.data || []);
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // 副作用
+  useEffect(() => {
+    getSwiperInfo();
+  }, []);
 
-  componentDidMount () { }
+  /* 首页轮播图 */
 
-  componentWillUnmount () { }
+  return (
+    <View className='page_index'>
+       <Tabs 
+         type='line'
+         size='large'
+         leftAlign
+       >
+        <Tabs.TabPane title='头条'>
+          
+       
+        <Swiper
+          className='scroll_view'
+          indicatorDots
+          autoplay
+          circular
+          interval={5000}
+        >
+          {swiperList.map((item, index) => {
+            return (
+              <SwiperItem key={index}>
+                <View className='img_box'>
+                <img src={item.img} alt='' />
+                </View>
+               
+              </SwiperItem>
+            );
+          })}
+        </Swiper>
+        </Tabs.TabPane>
+      </Tabs>
+    </View>
+  );
+};
 
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-        <Button type='primary' className='btn'>主要按钮</Button>
-      </View>
-    )
-  }
-}
+export default Index;

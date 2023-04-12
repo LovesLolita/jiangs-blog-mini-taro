@@ -9,7 +9,7 @@ const createApp = (opts) => {
   app = create(opts)
   // 确保所有state模块（model）只注册一次
   if (!global.registered) {
-    opts.models.forEach(model => app.model(model));
+    opts.modules.forEach(model => app.model(model));
   }
   global.registered = true;
   // 运行程序

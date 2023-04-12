@@ -1,0 +1,21 @@
+.page_index{
+  .scroll_view{
+    height: 370px;
+    .img_box{
+      box-sizing:border-box;
+      margin: 20px;
+      height: 350px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 1px 10px 5px #fff;;
+      image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .nut-tabpane {
+    padding: 0;
+  }
+
+}
