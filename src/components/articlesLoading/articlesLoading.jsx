@@ -17,8 +17,6 @@ const ArticlesLoading = memo(
                 <Icon name="loading" className="text_icon" />
               </View>
             );
-          } else {
-            return <></>
           }
         })()}
       </>
