@@ -11,6 +11,7 @@ import {
   Col,
   Icon,
 } from "@nutui/nutui-react-taro";
+import ArticlesLoading from '@/components/articlesLoading/articlesLoading'
 import tools from "@/common/tools";
 import API from "@/api";
 import "./index.scss";
@@ -43,7 +44,8 @@ const Index = () => {
   /* 首页文章列表 */
 
   const [latestArticles, setLatestArticles] = useState([]);
-
+  const [loadingShow, setLoadingShow ] = useState(false)
+ 
   const onScrollToLower = () => {
     getLatestArticles(false);
   };
@@ -59,6 +61,7 @@ const Index = () => {
 
   const getLatestArticles = async (refresh) => {
     try {
+      setLoadingShow(true)
       let offset = 0;
       if (!refresh) {
         offset = latestArticles.length;
@@ -70,11 +73,14 @@ const Index = () => {
       console.log(res);
       if (res.code === 0) {
         setLatestArticles([...latestArticles, ...res.data]);
+        setLoadingShow(false)
       } else {
         tools.showToast(res.data.msg);
+        setLoadingShow(false)
       }
     } catch (err) {
       console.log(err);
+      setLoadingShow(false)
     }
   };
 
@@ -182,6 +188,7 @@ const Index = () => {
               }
             })()}
           </View>
+           <ArticlesLoading  loadingShow={loadingShow} />
         </Tabs.TabPane>
       </Tabs>
     </View>
