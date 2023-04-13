@@ -118,7 +118,12 @@ const Index = () => {
     <View className="page_index">
       <BackTop distance={200} bottom={50} />
       <Sticky top={0}>
-      <View style={{ paddingTop: Taro.getWindowInfo().statusBarHeight, backgroundColor: '#fff' }}></View>
+        <View
+          style={{
+            paddingTop: Taro.getWindowInfo().statusBarHeight,
+            backgroundColor: "#fff",
+          }}
+        ></View>
         <View className="top_box">
           <Row>
             <Col span="18">
