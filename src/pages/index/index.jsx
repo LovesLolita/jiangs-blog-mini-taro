@@ -120,7 +120,7 @@ const Index = () => {
       <Sticky top={0}>
         <View
           style={{
-            paddingTop: Taro.getWindowInfo().statusBarHeight,
+            paddingTop: Taro.getWindowInfo()?.statusBarHeight,
             backgroundColor: "#fff",
           }}
         ></View>
