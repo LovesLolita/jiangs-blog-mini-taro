@@ -40,7 +40,7 @@ const Index = () => {
     getSwiperInfo();
   }, []);
 
-  /* 首页轮播图 */
+  /* 首页轮播图end */
 
   /* 首页文章列表 */
 
