@@ -1,71 +1,84 @@
 .page_index {
-  .scroll_swiper {
-    height: 270px;
-    .img_box {
-      box-sizing: border-box;
-      margin: 20px;
-      height: 250px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 1px 10px 5px #fff;
-      image {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
   .nut-tabpane {
     padding: 0;
   }
-  .new_articles {
-    margin: 0px 0px 0 10px;
-    .scroll_view {
-      // height: 830px;
-      .articles_content {
-        margin: 0px 15px 0px 10px;
-        // box-shadow: 0px 0px 6px 0px rgba(9, 9, 50, 0.15);
-        border-bottom: 1px solid #ccc;
-        min-height: 200px;
-        .left_text_box {
-          margin: 0 0px 0 20px;
-          .left_title {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 30px;
-            color: #333;
-            font-weight: 600;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .left_content {
-            margin-top: 5px;
-            text-align: left;
-            font-size: 25px;
-            color: #999;
-            font-weight: 400;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .left_icon {
-            margin: 5px 10px 0 20px;
-            font-size: 29px;
-            vertical-align: bottom;
-          }
+  .top_box {
+    background-color: #fff;
+    height: 100px;
+    .logo {
+      // background-color: #ccc;
+      image {
+        height: 55px;
+        width: 128px;
+      }
+    }
+  }
+  .main_page {
+    .scroll_swiper {
+      height: 270px;
+      .img_box {
+        box-sizing: border-box;
+        margin: 20px;
+        height: 250px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 1px 10px 5px #fff;
+        image {
+          width: 100%;
+          height: 100%;
         }
-        .image_box{
-          padding: 20px;
-          height: 180px;
-          border-radius: 80px;
-          overflow: hidden;
-          image{
-            width: 100%;
-            height: 100%;
+      }
+    }
+    .new_articles {
+      margin: 0px 0px 0 10px;
+      .scroll_view {
+        // height: 830px;
+        .articles_content {
+          margin: 0px 15px 0px 10px;
+          // box-shadow: 0px 0px 6px 0px rgba(9, 9, 50, 0.15);
+          border-bottom: 1px solid #ccc;
+          min-height: 200px;
+          .left_text_box {
+            margin: 0 0px 0 20px;
+            .left_title {
+              margin-top: 20px;
+              text-align: center;
+              font-size: 30px;
+              color: #333;
+              font-weight: 600;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .left_content {
+              margin-top: 5px;
+              text-align: left;
+              font-size: 25px;
+              color: #999;
+              font-weight: 400;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .left_icon {
+              margin: 5px 10px 0 20px;
+              font-size: 29px;
+              vertical-align: bottom;
+            }
+          }
+          .image_box {
+            padding: 20px;
+            height: 180px;
+            border-radius: 80px;
+            overflow: hidden;
+            image {
+              width: 100%;
+              height: 100%;
+            }
           }
         }
       }
