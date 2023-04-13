@@ -17,12 +17,29 @@ import {
 import ArticlesLoading from "@/components/articlesLoading/articlesLoading";
 import tools from "@/common/tools";
 import API from "@/api";
-import Logo from "@/assets/images/logo.png";
+import LogoImg from "@/assets/images/logo.png";
 import "./index.scss";
 
 const Index = () => {
   /* 顶部内容 */
+  const [Logo, setLogo] = useState(LogoImg)
 
+  const getLogoData = async() => {
+    try {
+      const res = await API.JIANGQIE_SETTING_HOME()
+      console.log(res);
+      if(res.code === 0){
+        setLogo(res.data.logo || LogoImg)
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  } 
+  useEffect(() => {
+    getLogoData()
+  }, [])
   /* 顶部内容end */
 
   /* 首页轮播图 */
