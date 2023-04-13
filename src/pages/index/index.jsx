@@ -22,6 +22,10 @@ import "./index.scss";
 
 const Index = () => {
   /* 顶部内容 */
+  let statusBarHeight = ''
+  if(Taro.getEnv() === 'ENV_TYPE.WEB'){
+   statusBarHeight = Taro.getWindowInfo().statusBarHeight
+  }
   const [Logo, setLogo] = useState(LogoImg);
 
   const getLogoData = async () => {
@@ -120,7 +124,7 @@ const Index = () => {
       <Sticky top={0}>
         <View
           style={{
-            paddingTop: Taro.getWindowInfo()?.statusBarHeight,
+            paddingTop: statusBarHeight,
             backgroundColor: "#fff",
           }}
         ></View>
