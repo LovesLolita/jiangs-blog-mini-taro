@@ -121,7 +121,7 @@ const Index = () => {
       <View style={{ paddingTop: Taro.getWindowInfo().statusBarHeight, backgroundColor: '#fff' }}></View>
         <View className="top_box">
           <Row>
-            <Col span="19">
+            <Col span="18">
               <SearchBar
                 leftoutIcon={(() => (
                   <View class="logo">
