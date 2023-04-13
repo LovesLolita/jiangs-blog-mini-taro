@@ -22,24 +22,24 @@ import "./index.scss";
 
 const Index = () => {
   /* 顶部内容 */
-  const [Logo, setLogo] = useState(LogoImg)
+  const [Logo, setLogo] = useState(LogoImg);
 
-  const getLogoData = async() => {
+  const getLogoData = async () => {
     try {
-      const res = await API.JIANGQIE_SETTING_HOME()
+      const res = await API.JIANGQIE_SETTING_HOME();
       console.log(res);
-      if(res.code === 0){
-        setLogo(res.data.logo || LogoImg)
+      if (res.code === 0) {
+        setLogo(res.data.logo || LogoImg);
       } else {
         tools.showToast(res.data.msg);
       }
     } catch (err) {
       console.log(err);
     }
-  } 
+  };
   useEffect(() => {
-    getLogoData()
-  }, [])
+    getLogoData();
+  }, []);
   /* 顶部内容end */
 
   /* 首页轮播图 */
@@ -118,6 +118,7 @@ const Index = () => {
     <View className="page_index">
       <BackTop distance={200} bottom={50} />
       <Sticky top={0}>
+      <View style={{ paddingTop: Taro.getWindowInfo().statusBarHeight, backgroundColor: '#fff' }}></View>
         <View className="top_box">
           <Row>
             <Col span="19">
