@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Taro from '@tarojs/taro'
+import Taro, { usePullDownRefresh, useReachBottom } from "@tarojs/taro";
 import { Component, useEffect, useState } from "react";
 import { View, Text, Swiper, SwiperItem, ScrollView } from "@tarojs/components";
 import {
@@ -48,6 +48,15 @@ const Index = () => {
     getLatestArticles(false);
   };
 
+  usePullDownRefresh(() => {
+    getLatestArticles('refresh');
+  })
+
+  // 页面触底动作
+  useReachBottom(() => {
+    getLatestArticles(false);
+  })
+
   const getLatestArticles = async (refresh) => {
     try {
       let offset = 0;
@@ -66,7 +75,6 @@ const Index = () => {
       }
     } catch (err) {
       console.log(err);
-      
     }
   };
 
@@ -115,7 +123,7 @@ const Index = () => {
                         <Button
                           icon="refresh"
                           type="primary"
-                          onClick={()=> getLatestArticles("refresh")}
+                          onClick={() => getLatestArticles("refresh")}
                         >
                           亲,请重试一下
                         </Button>
@@ -126,43 +134,49 @@ const Index = () => {
               } else {
                 return (
                   <ScrollView
-                    className="scroll_view"
                     scrollY
                     scrollWithAnimation
                     scrollAnchoring
                     scrollTop={0}
-                    onRefresherRefresh={(e) => getLatestArticles( "refresh",e)}
+                    onRefresherRefresh={(e) => getLatestArticles("refresh", e)}
                     onScrollToLower={onScrollToLower}
                   >
-                    {latestArticles.map((item, index) => {
-                      return (
-                        <View className="articles_content" key={index}>
-                          <Row>
-                            <Col span="14">
-                              <View className="left_text_box">
-                                <View className="left_title">{item.title}</View>
-                                <View className="left_content">
-                                  {item.excerpt}
+                    <View className="scroll_view">
+                      {latestArticles.map((item, index) => {
+                        return (
+                          <View className="articles_content" key={index}>
+                            <Row>
+                              <Col span="14">
+                                <View className="left_text_box">
+                                  <View className="left_title">
+                                    {item.title}
+                                  </View>
+                                  <View className="left_content">
+                                    {item.excerpt}
+                                  </View>
+                                  <View
+                                    className="left_content"
+                                    style={{ textAlign: "left" }}
+                                  >
+                                    {item.time}
+                                    <Icon
+                                      name="eye"
+                                      className="left_icon"
+                                    ></Icon>
+                                    {item.views}
+                                  </View>
                                 </View>
-                                <View
-                                  className="left_content"
-                                  style={{ textAlign: "left" }}
-                                >
-                                  {item.time}
-                                  <Icon name="eye" className="left_icon"></Icon>
-                                  {item.views}
+                              </Col>
+                              <Col span="10">
+                                <View className="image_box">
+                                  <img src={item.thumbnail} alt="" />
                                 </View>
-                              </View>
-                            </Col>
-                            <Col span="10">
-                              <View className="image_box">
-                                <img src={item.thumbnail} alt="" />
-                              </View>
-                            </Col>
-                          </Row>
-                        </View>
-                      );
-                    })}
+                              </Col>
+                            </Row>
+                          </View>
+                        );
+                      })}
+                    </View>
                   </ScrollView>
                 );
               }
