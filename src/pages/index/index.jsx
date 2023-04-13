@@ -23,7 +23,7 @@ import "./index.scss";
 const Index = () => {
   /* 顶部内容 */
   let statusBarHeight = ''
-  if(Taro.getEnv() === 'ENV_TYPE.WEB'){
+  if(Taro.getEnv() !== 'ENV_TYPE.WEB'){
    statusBarHeight = Taro.getWindowInfo().statusBarHeight
   }
   const [Logo, setLogo] = useState(LogoImg);
