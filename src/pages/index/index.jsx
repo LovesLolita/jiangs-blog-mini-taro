@@ -10,6 +10,7 @@ import {
   Row,
   Col,
   Icon,
+  BackTop
 } from "@nutui/nutui-react-taro";
 import ArticlesLoading from '@/components/articlesLoading/articlesLoading'
 import tools from "@/common/tools";
@@ -91,6 +92,7 @@ const Index = () => {
 
   return (
     <View className="page_index">
+       <BackTop  distance={200} bottom={50} />
       <Tabs type="line" size="large" leftAlign>
         <Tabs.TabPane title="头条">
           <Swiper
