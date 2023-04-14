@@ -1,9 +1,9 @@
 .u_center {
   --nutui-avatar-large-width: 150px;
   --nutui-avatar-large-height: 150px;
-  // --nutui-avatar-large-height: 100px;
+  --nutui-grid-border-color: #f1f1f1;
   height: 100vh;
-  background-color: #000;
+  background-color: #fff;
   .top_user_info {
     position: relative;
     height: 300px;
@@ -25,10 +25,17 @@
         bottom: 50%;
         transform: translate(-50%, 50%);
       }
+      .user_name{
+        margin-top: 5px;
+        text-align: center;
+        font-size: 30px;
+        color: #666666;
+        font-weight: 600;
+      }
     }
   }
   .features_options {
-    margin-top: 100px;
+    margin-top: 120px;
     padding: 20px;
   }
   .out_login {

@@ -1,4 +1,5 @@
-/* eslint-disable */
+
+ /* eslint-disable */
 import React from "react";
 import { Avatar, Icon, Tag, Grid, GridItem, Button } from "@nutui/nutui-react-taro";
 import { View } from "@tarojs/components";
@@ -16,10 +17,13 @@ const Ucenter = () => {
           <Avatar size="large" shape="round" className="avatar_style">
             <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
           </Avatar>
+          <View className="user_name">
+            微信用户
+          </View>
         </View>
       </View>
       <View className="features_options">
-        <Grid gutter={4}>
+        <Grid gutter={15} columnNum={3}>
           <GridItem icon="eye" text="我的浏览" />
           <GridItem icon="fabulous" text="我的点赞" />
           <GridItem icon="star" text="我的收藏" />
