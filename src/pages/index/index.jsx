@@ -30,7 +30,7 @@ const Index = () => {
 
   const getLogoData = async () => {
     try {
-      const res = await API.JIANGQIE_SETTING_HOME();
+      const res = await API.SETTING_HOME();
       console.log(res);
       if (res.code === 0) {
         setLogo(res.data.logo || LogoImg);
@@ -52,7 +52,7 @@ const Index = () => {
 
   const getSwiperInfo = async () => {
     try {
-      const res = await API.JIANGQIE_SETTING_LUNBOTU();
+      const res = await API.SETTING_LUNBOTU();
       console.log(res);
       if (res?.code === 0) {
         setSwiperList(res?.data?.data || []);
@@ -98,7 +98,7 @@ const Index = () => {
       let params = {
         offset: offset,
       };
-      const res = await API.JIANGQIE_POSTS_LAST(params);
+      const res = await API.POSTS_LAST(params);
       console.log(res);
       if (res.code === 0) {
         setLatestArticles([...latestArticles, ...res.data]);
