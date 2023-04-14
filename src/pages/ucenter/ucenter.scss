@@ -5,6 +5,12 @@
     position: relative;
     height: 300px;
     background-color: #ccc;
+    .login_tag{
+      position: absolute;
+      top: 5%;
+      right: 2%;
+      font-size: 30px;
+    }
     .user_avatar{
       position: absolute;
       left: 50%;
@@ -18,5 +24,13 @@
       }
 
     }
+  }
+  .features_options{
+    margin-top: 100px;
+    padding: 20px;
+  }
+  .out_login{
+    margin-top: 0px;
+    padding: 20px;
   }
 }
