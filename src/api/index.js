@@ -22,6 +22,12 @@ export default {
   POSTS_LAST: (params) =>
     tools.request({
       url: makeURL("posts", "last"),
-      params: params
+      params: params,
+    }),
+  // 获取我的配置
+  SETTING_UCENTER: (params) =>
+    tools.request({
+      url: makeURL("setting", "ucenter"),
+      params: params,
     }),
 };
