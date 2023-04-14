@@ -15,11 +15,11 @@ const tools = {
     });
   },
   setUser(user) {
-    Taro.setStorageSync(Constant.JQ_USER_KEY, user);
+    Taro.setStorageSync(Constant.USER_KEY, user);
   },
 
   getUser() {
-    return Taro.getStorageSync(Constant.JQ_USER_KEY);
+    return Taro.getStorageSync(Constant.USER_KEY);
   },
   /**
    * 网络请求
