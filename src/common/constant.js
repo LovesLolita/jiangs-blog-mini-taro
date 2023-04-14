@@ -1,12 +1,15 @@
+export default {
+  JQ_VERSION: "2.2.0",
 
-import dayjs from 'dayjs'
+  //分页 每页 数量 需要与服务器一致
+  JQ_PER_PAGE_COUNT: 10,
 
-export const ERR_MES = "网络开了小差，请稍后重试～"
+  //搜索词 做多缓存个数
+  JQ_SEARCH_MAX_COUNT: 10,
 
-// 日历最小日期
-export const MIN_DATE = dayjs().format('YYYY-MM-DD')
-// 最大日期
-export const MAX_DATE = dayjs().add(60, 'day').format('YYYY-MM-DD')
+  //搜索词 缓存 key
+  JQ_SEARCH_KEY: "jiangqie_search",
 
-// 用户登录有效期10天
-export const USER_VALID_TIME = 10 * 24 * 60 * 60
+  //用户信息
+  JQ_USER_KEY: "jiangqie_user",
+};

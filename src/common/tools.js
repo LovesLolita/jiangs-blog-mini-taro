@@ -1,14 +1,25 @@
 import Taro from "@tarojs/taro";
 import { objectToString } from "@/common/utils";
+import Constant from "./constant";
 
+function logout() {
+  Taro.setStorageSync(Constant.USER_KEY, false);
+}
 const tools = {
   checkSession: () => {
     Taro.checkSession({
       fail: () => {
         // session_key 已经失效，需要重新执行登录流程
-        Taro.login(); //重新登录
+        logout(); //重新登录
       },
     });
+  },
+  setUser(user) {
+    Taro.setStorageSync(Constant.JQ_USER_KEY, user);
+  },
+
+  getUser() {
+    return Taro.getStorageSync(Constant.JQ_USER_KEY);
   },
   /**
    * 网络请求
