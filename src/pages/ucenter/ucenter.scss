@@ -1,35 +1,37 @@
-.u_center{
+.u_center {
+  --nutui-avatar-large-width: 150px;
+  --nutui-avatar-large-height: 150px;
+  // --nutui-avatar-large-height: 100px;
   height: 100vh;
   background-color: #000;
-  .top_user_info{
+  .top_user_info {
     position: relative;
     height: 300px;
     background-color: #ccc;
-    .login_tag{
+    .login_tag {
       position: absolute;
       top: 5%;
       right: 2%;
       font-size: 30px;
     }
-    .user_avatar{
+    .user_avatar {
       position: absolute;
       left: 50%;
       bottom: 0%;
-      transform: translate(-50%,50%);
-      .avatar_icon{
+      transform: translate(-50%, 50%);
+      .avatar_icon {
         position: absolute;
         left: 50%;
         bottom: 50%;
-        transform: translate(-50%,50%);
+        transform: translate(-50%, 50%);
       }
-
     }
   }
-  .features_options{
+  .features_options {
     margin-top: 100px;
     padding: 20px;
   }
-  .out_login{
+  .out_login {
     margin-top: 0px;
     padding: 20px;
   }

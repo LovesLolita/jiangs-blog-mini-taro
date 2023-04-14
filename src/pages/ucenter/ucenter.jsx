@@ -13,8 +13,8 @@ const Ucenter = () => {
           未登入
         </Tag>
         <View className="user_avatar">
-          <Avatar size="large" shape="round">
-            <Icon name="my" size="2rem" className="avatar_icon"></Icon>
+          <Avatar size="large" shape="round" className="avatar_style">
+            <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
           </Avatar>
         </View>
       </View>
