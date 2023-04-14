@@ -1,6 +1,7 @@
 
  /* eslint-disable */
 import React, { useEffect, useState } from "react";
+import Taro from "@tarojs/taro";
 import tools from "@/common/tools";
 import API from "@/api";
 import { Avatar, Icon, Tag, Grid, GridItem, Button } from "@nutui/nutui-react-taro";
@@ -31,6 +32,18 @@ const Ucenter = () => {
   }, [])
   /* 获取用户信息end */
 
+  /* 登入 */
+  const login = async() => {
+    try {
+      const res  = await Taro.login()
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+   
+  }
+  /* 登入end */
+
   return (
     <View className="u_center">
       <View className="top_user_info">
@@ -38,8 +51,8 @@ const Ucenter = () => {
         <Tag type="warning" className="login_tag">
           未登入
         </Tag>
-        <View className="user_avatar">
-          <Avatar size="large" shape="round" className="avatar_style">
+        <View className="user_avatar" onClick={login}>
+          <Avatar size="large" shape="round" className="avatar_style" >
             <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
           </Avatar>
           <View className="user_name">
