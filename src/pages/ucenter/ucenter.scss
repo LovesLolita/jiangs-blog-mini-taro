@@ -1,0 +1,22 @@
+.u_center{
+  height: 100vh;
+  background-color: #000;
+  .top_user_info{
+    position: relative;
+    height: 300px;
+    background-color: #ccc;
+    .user_avatar{
+      position: absolute;
+      left: 50%;
+      bottom: 0%;
+      transform: translate(-50%,50%);
+      .avatar_icon{
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%,50%);
+      }
+
+    }
+  }
+}
