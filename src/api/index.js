@@ -2,7 +2,7 @@ import tools from "@/common/tools";
 import baseUrl from "./baseUrl";
 
 function makeURL(module, action) {
-  return `${baseUrl}/wp-json/jiangqie/v1/${module}/${action}`;
+  return `${baseUrl}/wp-json/jiangMpApi/v1/${module}/${action}`;
 }
 
 export default {
