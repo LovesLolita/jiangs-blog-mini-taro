@@ -1,0 +1,29 @@
+.hot {
+  .timeline-head {
+    height: 280px;
+    width: 100%;
+    position: relative;
+    image {
+      height: 280px;
+      width: 100%;
+    }
+    .timeline-head-text {
+      width: 610px;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      padding: 20px 40px;
+      position: absolute;
+      bottom: 20rpx;
+      left: 30px;
+      border-radius: 16px;
+      .timeline-head-describe {
+        color: #fff;
+        font-weight: 400;
+        font-size: 24px;
+      }
+    }
+  }
+  .nut-tabpane{
+    padding: 0;
+  }
+}

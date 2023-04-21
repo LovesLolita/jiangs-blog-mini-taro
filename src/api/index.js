@@ -30,4 +30,15 @@ export default {
       url: makeURL("setting", "ucenter"),
       params: params,
     }),
+  // 获取热门配置
+  SETTING_HOT: () =>
+    tools.request({
+      url: makeURL("setting", "hot"),
+    }),
+  // 获取热门配置
+  POSTS_HOT: (params) =>
+    tools.request({
+      url: makeURL("posts", "hot"),
+      params: params,
+    }),
 };
