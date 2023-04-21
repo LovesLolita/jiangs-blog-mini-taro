@@ -36,14 +36,19 @@ const Hot = () => {
     { title: "评论数", sort: "comments" },
   ];
   const [tabValue, setTabValue] = useState("views");
+  const changeTabValue = (item) => {
+    setTabValue(item.paneKey)
+  }
+  useEffect(()=>{
+    getHotArticles('refresh')
+  }, [tabValue])
   /* tab栏end */
 
   /* 热门文章列表 */
   const [hotArticlesList, setHotArticlesList] = useState([]);
   // 获取热门列表
-  const getHotArticles = useCallback(async (refresh) => {
+  const getHotArticles = async (refresh) => {
     try {
-      console.log(refresh);
       let params = {
         offset: refresh ? 0 : hotArticlesList.length,
         sort: tabValue,
@@ -57,10 +62,7 @@ const Hot = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [tabValue]);
-  useEffect(() => {
-    getHotArticles();
-  }, [getHotArticles]);
+  };
   /* 热门文章列表end */
 
   return (
@@ -82,8 +84,8 @@ const Hot = () => {
       </View>
       <Tabs
         value={tabValue}
-        onChange={({ paneKey }) => {
-          setTabValue(paneKey);
+        onChange={(item) => {
+          changeTabValue(item)
         }}
         type="smile"
       >
