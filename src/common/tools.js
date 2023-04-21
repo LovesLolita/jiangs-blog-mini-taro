@@ -24,6 +24,11 @@ const tools = {
    * @{param}	 opts
    */
   request: (opts) => {
+    console.log(opts);
+    Taro.showLoading({
+      title: "加载中,请稍后",
+      mask: true, // 防止触摸穿透
+    })
     const {
       url = "",
       params = {}, // 请求参数
@@ -42,13 +47,16 @@ const tools = {
           if (data?.code === 0) {
             // 成功
             resolve(data);
+            Taro.hideLoading();
           } else {
             // 不是预期的结果
             reject(res);
+            Taro.hideLoading();
           }
         })
         .catch((err) => {
           reject(err);
+          Taro.hideLoading();
         });
     });
   },

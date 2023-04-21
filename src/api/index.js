@@ -40,5 +40,8 @@ export default {
     tools.request({
       url: makeURL("posts", "hot"),
       params: params,
+      option: {
+        hideLoading: true
+      }
     }),
 };
