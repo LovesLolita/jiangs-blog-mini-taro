@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useCallback } from "react";
 import Taro from "@tarojs/taro";
 import tools from "@/common/tools";
@@ -34,7 +35,7 @@ const Hot = () => {
     { title: "收藏数", sort: "favorites" },
     { title: "评论数", sort: "comments" },
   ];
-  const [tabValue, setTabValue] = useState('views');
+  const [tabValue, setTabValue] = useState("views");
   /* tab栏end */
 
   /* 热门文章列表 */
@@ -42,47 +43,49 @@ const Hot = () => {
   // 获取热门列表
   const getHotArticles = useCallback(async (refresh) => {
     try {
+      console.log(refresh);
       let params = {
-        offset: refresh ? 0 : getHotArticles.length,
+        offset: refresh ? 0 : hotArticlesList.length,
         sort: tabValue,
       };
       const res = await API.POSTS_HOT(params);
       if (res.code === 0) {
+        setHotArticlesList(res.data || []);
       } else {
         tools.showToast(res.data.msg);
       }
     } catch (err) {
       console.log(err);
     }
-  }, [tabValue]);
+  }, []);
   useEffect(() => {
     getHotArticles();
   }, [getHotArticles]);
   /* 热门文章列表end */
 
   return (
-    <View className='hot'>
-      <View className='timeline-head'>
+    <View className="hot">
+      <View className="timeline-head">
         {(() => {
           if (Object.keys(HotOptions).length !== 0) {
             return (
-              <View className='timeline-head-text'>
+              <View className="timeline-head-text">
                 <Text>{HotOptions.title}</Text>
-                <View className='timeline-head-describe'>
+                <View className="timeline-head-describe">
                   {HotOptions.description}
                 </View>
               </View>
             );
           }
         })()}
-        <image src={HotOptions.background} mode='aspectFill' />
+        <image src={HotOptions.background} mode="aspectFill" />
       </View>
       <Tabs
         value={tabValue}
         onChange={({ paneKey }) => {
           setTabValue(paneKey);
         }}
-        type='smile'
+        type="smile"
       >
         {TabBar.map((item, index) => {
           return (
@@ -93,12 +96,12 @@ const Hot = () => {
       {(() => {
         if (hotArticlesList.length === 0) {
           return (
-            <View className='empty'>
-              <Empty image='network' description='当前分类无文章'>
+            <View className="empty">
+              <Empty image="network" description="当前分类无文章">
                 <div style={{ marginTop: "10px" }}>
                   <Button
-                    icon='refresh'
-                    type='primary'
+                    icon="refresh"
+                    type="primary"
                     onClick={() => getHotArticles("refresh")}
                   >
                     亲,刷新一下
@@ -110,28 +113,27 @@ const Hot = () => {
         } else {
           return (
             <ScrollView>
-              <View className='scroll_view'>
+              <View className="scroll_view">
                 {hotArticlesList.map((item, index) => {
                   return (
-                    <View className='articles_content' key={index}>
+                    <View className="articles_content" key={index}>
                       <Row>
-                        <Col span='14'>
-                          <View className='left_text_box'>
-                            <View className='left_title'>{item.title}</View>
-                            <View className='left_content'>{item.excerpt}</View>
+                        <Col span="14">
+                          <View className="left_text_box">
+                            <View className="left_title">{item.title}</View>
                             <View
-                              className='left_content'
+                              className="left_content"
                               style={{ textAlign: "left" }}
                             >
                               {item.time}
-                              <Icon name='eye' className='left_icon'></Icon>
+                              <Icon name="eye" className="left_icon"></Icon>
                               {item.views}
                             </View>
                           </View>
                         </Col>
-                        <Col span='10'>
-                          <View className='image_box'>
-                            <img src={item.thumbnail} alt='' />
+                        <Col span="10">
+                          <View className="image_box">
+                            <img src={item.thumbnail} alt="" />
                           </View>
                         </Col>
                       </Row>
