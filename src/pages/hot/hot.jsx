@@ -36,6 +36,9 @@ const Hot = () => {
     { title: "评论数", sort: "comments" },
   ];
   const [tabValue, setTabValue] = useState("views");
+  useEffect(() =>{
+    getHotArticles('refresh')
+  } ,[tabValue])
   /* tab栏end */
 
   /* 热门文章列表 */
