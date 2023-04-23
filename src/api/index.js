@@ -44,4 +44,10 @@ export default {
         hideLoading: true
       }
     }),
+    // 用户登录
+    USER_LOGIN: (params) =>
+    tools.request({
+      url: makeURL('user', 'login3'),
+      params: params
+    }),
 };
