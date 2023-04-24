@@ -142,9 +142,6 @@ const Hot = () => {
   };
   /* 热门文章列表end */
 
-  const viewtt = (e) => {
-    console.log(e);
-  }
   return (
     <View className="hot">
       <BackTop distance={200} bottom={50} />

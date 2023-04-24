@@ -1,6 +1,48 @@
 .login{
-  .app-info{
-    text-align: center;
+  --nutui-avatar-large-width: 150px;
+  --nutui-avatar-large-height: 150px;
+  --nutui-grid-border-color: #f1f1f1;
+  height: 100vh;
+  background-color: #fff;
+  .top_user_info {
+    position: relative;
     height: 400px;
+    background-color: #ccc;
+    image{
+      width: 100%;
+      height: 100%;
+    }
+    .login_tag {
+      position: absolute;
+      top: 5%;
+      right: 2%;
+      font-size: 30px;
+    }
+    .user_avatar {
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+      text-align: center;
+      .avatar_icon {
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+      }
+      .user_name{
+        margin-top: 5px;
+        text-align: center;
+        font-size: 30px;
+        color: #ccc;
+        font-weight: 600;
+      }
+    }
+  }
+  .accredit_login_tip{
+    margin-top: 20px;
+    padding: 0 12px;
+    line-height: 60px;
+    color: #666;
   }
 }
