@@ -1,4 +1,4 @@
-import tools from "@/common/tools";
+import request from "@/api/request";
 import baseUrl from "./baseUrl";
 
 function makeURL(module, action) {
@@ -8,36 +8,36 @@ function makeURL(module, action) {
 export default {
   // 获取首页配置
   SETTING_HOME: () =>
-    tools.request({
+    request({
       url: makeURL("setting", "home"),
     }),
 
   //  获取首页轮播图
   SETTING_LUNBOTU: () =>
-    tools.request({
+    request({
       url: makeURL("setting", "rotatedPictures"),
     }),
 
   // 获取最新文章列表
   POSTS_LAST: (params) =>
-    tools.request({
+    request({
       url: makeURL("posts", "last"),
       params: params,
     }),
   // 获取我的配置
   SETTING_UCENTER: (params) =>
-    tools.request({
+    request({
       url: makeURL("setting", "ucenter"),
       params: params,
     }),
   // 获取热门配置
   SETTING_HOT: () =>
-    tools.request({
+    request({
       url: makeURL("setting", "hot"),
     }),
   // 获取热门配置
   POSTS_HOT: (params) =>
-    tools.request({
+    request({
       url: makeURL("posts", "hot"),
       params: params,
       option: {
@@ -46,13 +46,13 @@ export default {
     }),
     // 用户登录
     USER_LOGIN: (params) =>
-    tools.request({
+    request({
       url: makeURL('user', 'login3'),
       params: params
     }),
      // 用户登录演示
      USER_LOGIN_TEST: (params) =>
-     tools.request({
+     request({
        url: makeURL('user', 'logintest'),
        params: params
      }),

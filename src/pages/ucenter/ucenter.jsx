@@ -1,60 +1,87 @@
-
- /* eslint-disable */
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import tools from "@/common/tools";
 import API from "@/api";
-import { Avatar, Icon, Tag, Grid, GridItem, Button } from "@nutui/nutui-react-taro";
+import {
+  Avatar,
+  Icon,
+  Tag,
+  Grid,
+  GridItem,
+  Button,
+} from "@nutui/nutui-react-taro";
 import { View } from "@tarojs/components";
+import useUser from "@/hooks/useUser";
 
 import "./ucenter.scss";
 
 const Ucenter = () => {
-
   /* 获取用户信息 */
-  const [userBackground, setUserBackground] = useState('')
+  // useUser 自定义hooks
+  const [user, updateUser] = useUser();
+  /* 获取用户信息 end */
 
-  const userInfo = async() => {
+  /* 获取配置信息 */
+  const [setting, setSetting] = useState("");
+
+  const userInfo = async () => {
     try {
-      const res = await API.SETTING_UCENTER()
+      const res = await API.SETTING_UCENTER();
       console.log(res);
-      if(res.code === 0) {
-        setUserBackground(res.data.background || '')
+      if (res.code === 0) {
+        setSetting(res.data || "");
       } else {
         tools.showToast(res.data.msg);
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   useEffect(() => {
-    userInfo()
-  }, [])
-  /* 获取用户信息end */
+    userInfo();
+  }, []);
+  /* 获取配置信息end */
 
-  /* 登入 */
-  const loginNavigateTo = async() => {
+  /* click avatar */
+  const userNavigateTo = async () => {
+    if (user) {
+    } else {
+      // 登入页面
       Taro.navigateTo({
-        url:'/pages/login/login'
-      })
-
-  }
-  /* 登入end */
+        url: "/pages/login/login",
+      });
+    }
+  };
+  /* click avatar end */
 
   return (
     <View className="u_center">
       <View className="top_user_info">
-        <img src={userBackground} alt="" />
-        <Tag type="warning" className="login_tag">
-          未登入
-        </Tag>
-        <View className="user_avatar" onClick={loginNavigateTo}>
-          <Avatar size="large" shape="round" className="avatar_style" >
-            <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
-          </Avatar>
-          <View className="user_name">
-            微信用户
-          </View>
+        <img src={setting.background} alt="" />
+        {user ? (
+          <Tag type="success" className="login_tag">
+            已登入
+          </Tag>
+        ) : (
+          <Tag type="warning" className="login_tag">
+            未登入
+          </Tag>
+        )}
+        <View className="user_avatar" onClick={userNavigateTo}>
+          {user ? (
+            <Avatar
+              size="large"
+              shape="round"
+              className="avatar_style"
+              icon={user.avatar}
+            />
+          ) : (
+            <Avatar size="large" shape="round" className="avatar_style">
+              <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
+            </Avatar>
+          )}
+          <View className="user_name">{user ? user.nickname : ""}</View>
         </View>
       </View>
       <View className="features_options">
@@ -70,9 +97,11 @@ const Ucenter = () => {
         </Grid>
       </View>
       <View className="out_login">
-        <Button size="large" type="primary" color="#7232dd">
-          退出登入
-        </Button>
+        {user ? (
+          <Button size="large" type="primary" color="#7232dd">
+            退出登入
+          </Button>
+        ) : null}
       </View>
     </View>
   );
