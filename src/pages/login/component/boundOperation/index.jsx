@@ -98,7 +98,7 @@ const BoundOperation = () => {
           color='#497ef2'
           onClick={ToLogin}
         >
-          登入
+          绑定登入
         </Button>
       </View>
     </>
