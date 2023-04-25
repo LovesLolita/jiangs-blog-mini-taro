@@ -33,14 +33,11 @@ const Ucenter = () => {
   /* 获取用户信息end */
 
   /* 登入 */
-  const login = async() => {
-    try {
-      const res  = await Taro.login()
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-   
+  const loginNavigateTo = async() => {
+      Taro.navigateTo({
+        url:'/pages/login/login'
+      })
+
   }
   /* 登入end */
 
@@ -51,7 +48,7 @@ const Ucenter = () => {
         <Tag type="warning" className="login_tag">
           未登入
         </Tag>
-        <View className="user_avatar" onClick={login}>
+        <View className="user_avatar" onClick={loginNavigateTo}>
           <Avatar size="large" shape="round" className="avatar_style" >
             <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
           </Avatar>

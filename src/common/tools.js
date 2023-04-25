@@ -46,12 +46,14 @@ const tools = {
           const { data } = res;
           if (data?.code === 0) {
             // 成功
-            resolve(data);
             Taro.hideLoading();
+            resolve(data);
+            
           } else {
             // 不是预期的结果
-            reject(res);
             Taro.hideLoading();
+            reject(res);
+            
           }
         })
         .catch((err) => {
@@ -114,6 +116,16 @@ const tools = {
     const searchStr = objectToString(data);
     return Taro.navigateTo({
       url: `${url}?${searchStr}`,
+    });
+  },
+  navigateBack() {
+    Taro.navigateBack({
+      delta: 1,
+      fail: () => {
+        Taro.switchTab({
+          url: '/pages/index/index'
+        });
+      }
     });
   },
   /**

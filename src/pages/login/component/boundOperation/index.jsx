@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { View } from "@tarojs/components";
 import { Input, Button } from "@nutui/nutui-react-taro";
-import tools from "@/common/tools";
-import API from "@/api";
-import useUser from '@/hooks/useUser';
 
 // css module
 import styles from "./index.module.scss";
 
-const BoundOperation = () => {
+const BoundOperation = memo((props) => {
   /* 输入 */
   const [loginInfo, setLoginInfo] = useState({
     userName: "",
@@ -16,30 +13,21 @@ const BoundOperation = () => {
   });
 
   const disabledFlag = () => {
-    if(!loginInfo.userName || !loginInfo.password){
-      return true
+    if (!loginInfo.userName || !loginInfo.password) {
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   // 点击登入
-  // useUser 自定义hooks
-  const [user, updateUser] = useUser();
-
-  const ToLogin = async() => {
-    console.log(loginInfo);
+  const ToLogin = async () => {
     try {
-      const res = await API.USER_LOGIN_TEST({})
-      if(res.code === 0) {
-        updateUser(res.data)
-      } else {
-        tools.showToast(res.data.msg);
-      }
+      props.boundLogin(loginInfo);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   /* 输入 end */
 
@@ -62,8 +50,8 @@ const BoundOperation = () => {
         onClear={() => {
           setLoginInfo({
             ...loginInfo,
-            userName: '',
-          })
+            userName: "",
+          });
         }}
       />
       <Input
@@ -84,8 +72,8 @@ const BoundOperation = () => {
         onClear={() => {
           setLoginInfo({
             ...loginInfo,
-            password: '',
-          })
+            password: "",
+          });
         }}
       />
       <View>
@@ -103,6 +91,6 @@ const BoundOperation = () => {
       </View>
     </>
   );
-};
+});
 
 export default BoundOperation;
