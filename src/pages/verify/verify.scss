@@ -1,0 +1,26 @@
+.verify {
+  --nutui-avatar-large-width: 200px;
+  --nutui-avatar-large-height: 200px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  .verify_info {
+    padding-top: 120px;
+    text-align: center;
+    // background-color: #ccc;
+    .tip_avatar,
+    .tip_user_name {
+      margin-top: 30px;
+      font-size: 30px;
+      font-weight: 500;
+      color: #666;
+    }
+    .verify_input {
+      padding: 40px 170px;
+
+    }
+  }
+  .verify_button {
+  }
+}
