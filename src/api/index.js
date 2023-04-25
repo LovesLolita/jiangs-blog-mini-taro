@@ -1,4 +1,4 @@
-import request from "@/api/request";
+import { request, Upload } from "@/api/request";
 import baseUrl from "./baseUrl";
 
 function makeURL(module, action) {
@@ -55,5 +55,12 @@ export default {
      request({
        url: makeURL('user', 'logintest'),
        params: params
+     }),
+     // 上传图片
+     OTHER_UPLOAD: (params) =>
+     Upload({
+       url: makeURL('other', 'upload'),
+       params: params,
+       method: 'post'
      }),
 };

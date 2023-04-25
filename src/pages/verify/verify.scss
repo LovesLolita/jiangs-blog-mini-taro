@@ -8,7 +8,13 @@
   .verify_info {
     padding-top: 120px;
     text-align: center;
-    // background-color: #ccc;
+    .uploader_avatar {
+      border: none;
+      background: none;
+      &::after{
+        border: none;
+      }
+    }
     .tip_avatar,
     .tip_user_name {
       margin-top: 30px;
@@ -18,7 +24,6 @@
     }
     .verify_input {
       padding: 40px 170px;
-
     }
   }
   .verify_button {
