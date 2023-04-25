@@ -2,8 +2,16 @@ import Taro from "@tarojs/taro";
 import { objectToString } from "@/common/utils";
 import Constant from "./constant";
 
-
 const tools = {
+  getToken: () => {
+    let user = Taro.getStorageSync(Constant.USER_KEY);
+
+    if (!user) {
+      return false;
+    }
+
+    return user.token;
+  },
   checkSession: () => {
     Taro.checkSession({
       fail: () => {
@@ -80,9 +88,9 @@ const tools = {
       delta: 1,
       fail: () => {
         Taro.switchTab({
-          url: '/pages/index/index'
+          url: "/pages/index/index",
         });
-      }
+      },
     });
   },
   /**

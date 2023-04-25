@@ -127,15 +127,15 @@ const Login = () => {
   /* 登入 END */
 
   return (
-    <View className="login">
-      <View className="top_user_info">
-        <image src={option?.background} alt="" mode="aspectFill" />
-        <View className="user_avatar">
-          <Avatar size="large" shape="round" className="avatar_style">
-            <Icon name="my" size="3.5rem" className="avatar_icon"></Icon>
+    <View className='login'>
+      <View className='top_user_info'>
+        <image src={option?.background} alt='' mode='aspectFill' />
+        <View className='user_avatar'>
+          <Avatar size='large' shape='round' className='avatar_style'>
+            <Icon name='my' size='3.5rem' className='avatar_icon'></Icon>
           </Avatar>
-          <View className="user_name">未登入</View>
-          <Tag type="danger">授权登入可查看更多内容</Tag>
+          <View className='user_name'>未登入</View>
+          <Tag type='danger'>授权登入可查看更多内容</Tag>
         </View>
       </View>
       <>
@@ -145,20 +145,20 @@ const Login = () => {
             setTabValue(paneKey);
           }}
         >
-          <Tabs.TabPane title="授权登录">
+          <Tabs.TabPane title='授权登录'>
             <Button
-              size="large"
-              type="primary"
+              size='large'
+              type='primary'
               onClick={() => authLogin()}
-              color="linear-gradient(to right, #7232dd, #478cdc)"
+              color='linear-gradient(to right, #7232dd, #478cdc)'
             >
               授权登入
             </Button>
-            <View className="accredit_login_tip">
+            <View className='accredit_login_tip'>
               如果您已经有站点的账户，建议使用“绑定登录”关联账户进行登录，否则将会在第一次登录时创建新的账户
             </View>
           </Tabs.TabPane>
-          <Tabs.TabPane title="绑定登入">
+          <Tabs.TabPane title='绑定登入'>
             {" "}
             <BoundOperation boundLogin={getBoundLogin} />{" "}
           </Tabs.TabPane>

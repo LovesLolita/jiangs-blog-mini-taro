@@ -46,6 +46,9 @@ const Ucenter = () => {
   /* click avatar */
   const userNavigateTo = async () => {
     if (user) {
+      Taro.navigateTo({
+        url: "/pages/login/login",
+      });
     } else {
       // 登入页面
       Taro.navigateTo({
@@ -58,7 +61,7 @@ const Ucenter = () => {
   return (
     <View className="u_center">
       <View className="top_user_info">
-        <img src={setting.background} alt="" />
+        <image src={setting.background} alt="" mode='aspectFill' />
         {user ? (
           <Tag type="success" className="login_tag">
             已登入

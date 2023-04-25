@@ -1,4 +1,5 @@
 import Taro from "@tarojs/taro";
+import tools from "@/common/tools"
 /**
    * 网络请求
    * @{param}	 opts
@@ -15,6 +16,7 @@ const  request = (opts) => {
     method = "GET",
     ...rest // 剩余参数
   } = opts;
+  params.token = tools.getToken()
   return new Promise((resolve, reject) => {
     Taro.request({
       url,
