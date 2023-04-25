@@ -50,4 +50,10 @@ export default {
       url: makeURL('user', 'login3'),
       params: params
     }),
+     // 用户登录演示
+     USER_LOGIN_TEST: (params) =>
+     tools.request({
+       url: makeURL('user', 'logintest'),
+       params: params
+     }),
 };
