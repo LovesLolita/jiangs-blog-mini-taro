@@ -50,7 +50,7 @@ const Ucenter = () => {
   const userNavigateTo = async () => {
     if (user) {
       Taro.navigateTo({
-        url: "/pages/login/login",
+        url: "/pages/verify/verify",
       });
     } else {
       // 登入页面
