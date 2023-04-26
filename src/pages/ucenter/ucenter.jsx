@@ -12,7 +12,6 @@ import {
   Button,
 } from "@nutui/nutui-react-taro";
 import { View } from "@tarojs/components";
-import { useMount } from "ahooks";
 
 import "./ucenter.scss";
 
