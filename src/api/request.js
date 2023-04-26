@@ -43,7 +43,8 @@ const request = (opts) => {
   });
 };
 
-const Upload = (url, path, data = {}) => {
+const Upload = ({url, path, data = {}}) => {
+  
   return new Promise(function (resolve, reject) {
     Taro.showLoading({
       title: "上传中……",
@@ -57,7 +58,7 @@ const Upload = (url, path, data = {}) => {
       data.os = "qq";
     }
 
-
+    console.log(url, path, data);
     Taro.uploadFile({
       url: url,
       filePath: path,

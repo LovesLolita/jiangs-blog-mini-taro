@@ -41,26 +41,32 @@ export default {
       url: makeURL("posts", "hot"),
       params: params,
       option: {
-        hideLoading: true
-      }
+        hideLoading: true,
+      },
     }),
-    // 用户登录
-    USER_LOGIN: (params) =>
+  // 用户登录
+  USER_LOGIN: (params) =>
     request({
-      url: makeURL('user', 'login3'),
-      params: params
+      url: makeURL("user", "login3"),
+      params: params,
     }),
-     // 用户登录演示
-     USER_LOGIN_TEST: (params) =>
-     request({
-       url: makeURL('user', 'logintest'),
-       params: params
-     }),
-     // 上传图片
-     OTHER_UPLOAD: (params) =>
-     Upload({
-       url: makeURL('other', 'upload'),
-       params: params,
-       method: 'post'
-     }),
+  // 用户登录演示
+  USER_LOGIN_TEST: (params) =>
+    request({
+      url: makeURL("user", "logintest"),
+      params: params,
+    }),
+  // 上传图片
+  OTHER_UPLOAD: (path) =>
+    Upload({
+      url: makeURL("other", "upload"),
+      path: path,
+      data: {},
+    }),
+  //  用户 设置昵称头像
+  USER_SET_INFO: (params) =>
+    request({
+      url: makeURL("user", "set_info"),
+      params: params,
+    })
 };

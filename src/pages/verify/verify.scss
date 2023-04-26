@@ -11,7 +11,7 @@
     .uploader_avatar {
       border: none;
       background: none;
-      &::after{
+      &::after {
         border: none;
       }
     }
@@ -27,5 +27,16 @@
     }
   }
   .verify_button {
+    padding: 0 100px;
+    .verify_button_pass {
+      text-align: center;
+      height: 96px;
+      line-height: 96px;
+      border-radius: 96px;
+      font-size: 28px;
+      font-weight: 400;
+      color: #999999;
+      margin-top: 40px;
+    }
   }
 }
