@@ -68,5 +68,6 @@ export default {
     request({
       url: makeURL("user", "set_info"),
       params: params,
+      method:'POST'
     })
 };

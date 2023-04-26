@@ -30,6 +30,12 @@ const request = (opts) => {
           // 成功
           Taro.hideLoading();
           resolve(data);
+        } else if(data?.code === -1){
+          Taro.navigateTo({
+						url: '/pages/login/login'
+					})
+          resolve(res);
+					return;
         } else {
           // 不是预期的结果
           Taro.hideLoading();

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow } from "@tarojs/taro";
 import tools from "@/common/tools";
 import API from "@/api";
 import {
@@ -12,14 +12,18 @@ import {
   Button,
 } from "@nutui/nutui-react-taro";
 import { View } from "@tarojs/components";
-import useUser from "@/hooks/useUser";
+import { useMount } from "ahooks";
 
 import "./ucenter.scss";
 
 const Ucenter = () => {
   /* 获取用户信息 */
   // useUser 自定义hooks
-  const [user, updateUser] = useUser();
+  const [user, updateUser] = useState(() => tools.getUser());
+  // 保持最新数据
+  useDidShow(() => {
+    updateUser(() => tools.getUser())
+  })
   /* 获取用户信息 end */
 
   /* 获取配置信息 */

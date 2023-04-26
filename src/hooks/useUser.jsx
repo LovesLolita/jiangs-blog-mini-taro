@@ -6,8 +6,11 @@ function useUser() {
   const [user, setUser] = useState(() => Taro.getStorageSync(Constant.USER_KEY) || null);
 
   const updateUser = (newUser) => {
-    setUser(newUser);
-    Taro.setStorageSync(Constant.USER_KEY, newUser);
+    if(newUser){
+      Taro.setStorageSync(Constant.USER_KEY, newUser);
+    }
+    setUser(Taro.getStorageSync(Constant.USER_KEY));
+   
   };
 
   return [user, updateUser];

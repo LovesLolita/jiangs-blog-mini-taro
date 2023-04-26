@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Taro from "@tarojs/taro";
+import { useEffect, useState } from "react";
+import Taro, { useLoad } from "@tarojs/taro";
 import tools from "@/common/tools";
 import { Avatar, Input, Button as NutButton } from "@nutui/nutui-react-taro";
 import useUser from "@/hooks/useUser";
@@ -11,11 +11,13 @@ import "./verify.scss";
 const Verify = () => {
   /* 获取用户信息 */
   const [user, updateUser] = useUser();
-
+  useLoad(() =>{
+    console.log('useLoad');
+  })
   /* 获取用户信息 end */
 
   /* 上传avatar */
-  const [avatarUrl, updateAvatarUrl] = useState(user.avatar);
+  const [avatarUrl, updateAvatarUrl] = useState(tools.getUser()?.avatar || '');
 
   const onChooseAvatar = async (e) => {
     console.log(e);
@@ -33,7 +35,7 @@ const Verify = () => {
   /* 上传avatar end */
 
   /* 更换昵称 */
-  const [nickValue, UpdateNickValue] = useState(user.nickname);
+  const [nickValue, UpdateNickValue] = useState(tools.getUser()?.nickname);
   /* 更换昵称end */
 
   /* 操作区 */
@@ -54,7 +56,10 @@ const Verify = () => {
           icon: "none",
           title: res.msg,
         });
-        updateUser({ ...user, nickname: nickValue, avatar: avatarUrl });
+        updateUser({ ...tools.getUser(), nickname: nickValue, avatar: avatarUrl });
+        setTimeout(() => {
+          tools.navigateBack();
+        }, 1500)
       } else {
         tools.showToast(res.data.msg);
       }
