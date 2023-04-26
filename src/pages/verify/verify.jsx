@@ -3,8 +3,7 @@ import Taro from "@tarojs/taro";
 import tools from "@/common/tools";
 import { Avatar, Input, Button as NutButton } from "@nutui/nutui-react-taro";
 import useUser from "@/hooks/useUser";
-import { useMount } from "ahooks";
-import { View, Text, Button } from "@tarojs/components";
+import { View, Button } from "@tarojs/components";
 import API from "@/api";
 
 import "./verify.scss";
