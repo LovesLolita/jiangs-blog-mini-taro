@@ -79,6 +79,7 @@ const ArticleList = () => {
 
   return (
     <View className={style.ArticleList}>
+        <BackTop distance={200} bottom={50} />
       <ScrollView>
         <View className={style.categories_list}>
           {articleList.map((item) => {
