@@ -1,7 +1,14 @@
 import Taro, { useLoad, useReachBottom } from "@tarojs/taro";
 import { View, Text, ScrollView } from "@tarojs/components";
 import React, { useRef, useState } from "react";
-import { BackTop, Row, Col, Icon } from "@nutui/nutui-react-taro";
+import {
+  BackTop,
+  Row,
+  Col,
+  Icon,
+  Button,
+  Empty,
+} from "@nutui/nutui-react-taro";
 import tools from "@/common/tools";
 import API from "@/api";
 import ArticlesLoading from "@/components/articlesLoading/articlesLoading";
@@ -39,7 +46,7 @@ const ArticleList = () => {
   // 获取文章列表
   const getArticleList = async (refresh) => {
     try {
-      setLoadingShow(true)
+      setLoadingShow(true);
       let offset = 0;
       if (!refresh) {
         offset = articleList.length;
@@ -54,20 +61,40 @@ const ArticleList = () => {
         res = await API.POSTS_MY(params);
       }
       if (res?.code === 0) {
-        setLoadingShow(false)
+        setLoadingShow(false);
         setArticleList(res.data || []);
       } else {
         tools.showToast(res.data.msg);
-        setLoadingShow(false)
+        setLoadingShow(false);
       }
     } catch (err) {
       console.log(err);
-      setLoadingShow(false)
+      setLoadingShow(false);
     }
   };
 
-   // 页面触底动作
-   useReachBottom(() => {
+  // 空内容
+  const emptyFlag = () => {
+    if (articleList.length === 0) {
+      return (
+        <View className="empty">
+          <Empty image="network" description="无文章">
+            <div style={{ marginTop: "10px" }}>
+              <Button
+                icon="refresh"
+                type="primary"
+                onClick={() => getArticleList("refresh")}
+              >
+                亲,请重试一下
+              </Button>
+            </div>
+          </Empty>
+        </View>
+      );
+    }
+  };
+  // 页面触底动作
+  useReachBottom(() => {
     getArticleList(false);
   });
 
@@ -79,7 +106,8 @@ const ArticleList = () => {
 
   return (
     <View className={style.ArticleList}>
-        <BackTop distance={200} bottom={50} />
+      <BackTop distance={200} bottom={50} />
+      {emptyFlag()}
       <ScrollView>
         <View className={style.categories_list}>
           {articleList.map((item) => {
@@ -102,17 +130,14 @@ const ArticleList = () => {
                   </Col>
                   <Col span="8">
                     <View className={style.img_content}>
-                      <image
-                        src={item.thumbnail}
-                        mode="aspectFill"
-                      ></image>
+                      <image src={item.thumbnail} mode="aspectFill"></image>
                     </View>
                   </Col>
                 </Row>
               </View>
             );
           })}
-           <ArticlesLoading loadingShow={loadingShow} />
+          <ArticlesLoading loadingShow={loadingShow} />
         </View>
       </ScrollView>
     </View>
