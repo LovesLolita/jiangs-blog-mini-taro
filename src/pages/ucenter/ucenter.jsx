@@ -21,8 +21,8 @@ const Ucenter = () => {
   const [user, updateUser] = useState(() => tools.getUser());
   // 保持最新数据
   useDidShow(() => {
-    updateUser(() => tools.getUser())
-  })
+    updateUser(() => tools.getUser());
+  });
   /* 获取用户信息 end */
 
   /* 获取配置信息 */
@@ -61,10 +61,21 @@ const Ucenter = () => {
   };
   /* click avatar end */
 
+  /* 宫格 */
+  let myOptions = ["views", "likes", "favorites", "comments"];
+  const girdNavigateTo = (tag) => {
+    if (myOptions.indexOf(tag) !== -1) {
+      Taro.navigateTo({
+        url: `/pages/articleList/articleList?track=${tag}`,
+      });
+    }
+  };
+  /* 宫格end */
+
   return (
     <View className="u_center">
       <View className="top_user_info">
-        <image src={setting.background} alt="" mode='aspectFill' />
+        <image src={setting.background} alt="" mode="aspectFill" />
         {user ? (
           <Tag type="success" className="login_tag">
             已登入
@@ -92,10 +103,27 @@ const Ucenter = () => {
       </View>
       <View className="features_options">
         <Grid gutter={15} columnNum={3}>
-          <GridItem icon="eye" text="我的浏览" />
-          <GridItem icon="fabulous" text="我的点赞" />
-          <GridItem icon="star" text="我的收藏" />
-          <GridItem icon="comment" text="我的评论" />
+          <GridItem
+            icon="eye"
+            text="我的浏览"
+            name="myView"
+            onClick={() => girdNavigateTo("views")}
+          />
+          <GridItem
+            icon="fabulous"
+            text="我的点赞"
+            onClick={() => girdNavigateTo("likes")}
+          />
+          <GridItem
+            icon="star"
+            text="我的收藏"
+            onClick={() => girdNavigateTo("favorites")}
+          />
+          <GridItem
+            icon="comment"
+            text="我的评论"
+            onClick={() => girdNavigateTo("comments")}
+          />
           <GridItem icon="tips" text="关于我们" />
           <GridItem icon="people" text="意见反馈" />
           <GridItem icon="service" text="在线客服" />
