@@ -1,0 +1,74 @@
+.categories {
+  .timeline-head {
+    height: 280px;
+    width: 100%;
+    position: relative;
+    image {
+      height: 280px;
+      width: 100%;
+    }
+    .timeline-head-text {
+      width: 610px;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      padding: 20px 40px;
+      position: absolute;
+      bottom: 20rpx;
+      left: 30px;
+      border-radius: 16px;
+      .timeline-head-describe {
+        color: #fff;
+        font-weight: 400;
+        font-size: 24px;
+      }
+    }
+  }
+  .categories_list {
+    .categories_item {
+      margin: 20px 25px 20px;
+      border-bottom: 1px solid #ccc;
+      min-height: 200px;
+      border-radius: 12px;
+      border: 1px solid #999;
+      .img-content {
+        margin: 20px;
+        height: 160px;
+        width: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        image {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .right_text {
+        height: 100%;
+        padding: 20px;
+        .sort-title {
+          margin-top: 50px;
+          font-size: 32px;
+          text-align: center;
+          font-weight: 600;
+          color: #333;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .sort_summary{
+          margin-top: 20px;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 24px;
+          color: #999;
+          text-align: center;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

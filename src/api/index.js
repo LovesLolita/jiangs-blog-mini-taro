@@ -68,6 +68,16 @@ export default {
     request({
       url: makeURL("user", "set_info"),
       params: params,
-      method:'POST'
+      method: "POST",
+    }),
+  // 获取分类配置
+  SETTING_CATEGORY: () =>
+    request({
+      url: makeURL("setting", "category"),
+    }),
+  //  获取分类 只获取一级分类
+  CATEGORY_INDEX: () =>
+    request({
+      url: makeURL("category", "index"),
     })
 };
