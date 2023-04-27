@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMount } from "ahooks";
 import { View, Text, ScrollView } from "@tarojs/components";
-import { BackTop, Button, Row, Col } from "@nutui/nutui-react-taro";
+import { BackTop, Row, Col } from "@nutui/nutui-react-taro";
 import tools from "@/common/tools";
 import API from "@/api";
 
@@ -34,7 +34,7 @@ const Categories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
 
   // 获取分类信息
-  const getCategoriesData = async() => {
+  const getCategoriesData = async () => {
     try {
       const res = await API.CATEGORY_INDEX();
       if (res.code === 0) {
@@ -51,41 +51,41 @@ const Categories = () => {
   /* 分类型信息 end */
 
   return (
-    <View className='categories'>
+    <View className="categories">
       <BackTop distance={200} bottom={50} />
-      <View className='timeline-head'>
+      <View className="timeline-head">
         {(() => {
           if (Object.keys(setting).length !== 0) {
             return (
               <>
-                <View className='timeline-head-text'>
+                <View className="timeline-head-text">
                   <Text>{setting.title}</Text>
-                  <View className='timeline-head-describe'>
+                  <View className="timeline-head-describe">
                     {setting.description}
                   </View>
                 </View>
-                <image src={setting.background} mode='aspectFill' />
+                <image src={setting.background} mode="aspectFill" />
               </>
             );
           }
         })()}
       </View>
       <ScrollView>
-        <View className='categories_list'>
+        <View className="categories_list">
           {categoriesList.map((item) => {
             console.log(item);
             return (
-              <View className='categories_item' key={item.id}>
+              <View className="categories_item" key={item.id}>
                 <Row>
-                  <Col span='8'>
-                    <View className='img-content'>
-                      <image src={item.cover} mode='aspectFill'></image>
+                  <Col span="8">
+                    <View className="img-content">
+                      <image src={item.cover} mode="aspectFill"></image>
                     </View>
                   </Col>
-                  <Col span='12'>
-                    <View className='right_text'>
-                      <View className='sort-title'>{item.name}</View>
-                      <View className='sort_summary'> {item.description}</View>
+                  <Col span="12">
+                    <View className="right_text">
+                      <View className="sort-title">{item.name}</View>
+                      <View className="sort_summary"> {item.description}</View>
                     </View>
                   </Col>
                 </Row>
