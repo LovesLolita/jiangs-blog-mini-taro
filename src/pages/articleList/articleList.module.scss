@@ -1,0 +1,55 @@
+.ArticleList {
+  .categories_list {
+    .categories_item {
+      margin: 20px 25px 20px;
+      border-bottom: 1px solid #ccc;
+      min-height: 200px;
+      border-radius: 12px;
+      border: 1px solid #999;
+      .img_content {
+        margin: 20px;
+        height: 160px;
+        width: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        image {
+          height: 160px;
+          width: 200px;
+        }
+      }
+      .right_text {
+        height: 100%;
+        padding: 20px 20px 20px 50px;
+        .sortTitle {
+          height: 80px;
+          margin-top: 14px;
+          font-size: 28px;
+          text-align: left;
+          font-weight: 600;
+          color: #333;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .sort_summary {
+          margin-top: 20px;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 24px;
+          color: #999;
+          text-align: left;
+          font-weight: 400;
+          .text_icon{
+            vertical-align: text-top;
+          }
+        
+        }
+      }
+    }
+  }
+}

@@ -79,5 +79,11 @@ export default {
   CATEGORY_INDEX: () =>
     request({
       url: makeURL("category", "index"),
-    })
+    }),
+  // 我的]文章
+  POSTS_MY: (params) =>
+    request({
+      url: makeURL("posts", "my"),
+      params: params,
+    }),
 };
