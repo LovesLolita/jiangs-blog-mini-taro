@@ -62,6 +62,7 @@ const Ucenter = () => {
   /* click avatar end */
 
   /* 宫格 */
+  // 浏览 收藏 点赞 评论 跳转字段
   let myOptions = ["views", "likes", "favorites", "comments"];
   const girdNavigateTo = (tag) => {
     if (myOptions.indexOf(tag) !== -1) {
