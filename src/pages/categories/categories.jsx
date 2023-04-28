@@ -1,3 +1,4 @@
+import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { useMount } from "ahooks";
 import { View, Text, ScrollView } from "@tarojs/components";
@@ -45,6 +46,13 @@ const Categories = () => {
     }
   };
 
+  // 跳转文章页面
+  const NavigateToList = (item) => {
+    console.log(item);
+    Taro.navigateTo({
+      url: `/pages/articleList/articleList?track=categories&title=${item.name}&cat_id=${item.id}`,
+    });
+  }
   useMount(() => {
     getCategoriesData();
   });
@@ -74,7 +82,7 @@ const Categories = () => {
         <View className="categories_list">
           {categoriesList.map((item) => {
             return (
-              <View className="categories_item" key={item.id}>
+              <View className="categories_item" key={item.id} onClick={() =>NavigateToList(item)}>
                 <Row>
                   <Col span="8">
                     <View className="img-content">

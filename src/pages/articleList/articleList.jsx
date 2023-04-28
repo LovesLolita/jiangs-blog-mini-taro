@@ -32,6 +32,7 @@ const ArticleList = () => {
   /* 文章列表 */
   const [articleList, setArticleList] = useState([]);
   const [loadingShow, setLoadingShow] = useState(false);
+  let uCenterOptions = ["views", "likes", "favorites", "comments"];
 
   // 获取文章列表
   const getArticleList = async (refresh) => {
@@ -46,13 +47,16 @@ const ArticleList = () => {
         offset: offset,
       };
       let res = void 0;
-      if (optionsQuery.current.track) {
+      if (uCenterOptions.indexOf(optionsQuery.current.track) !== -1) {
         params.track = optionsQuery.current.track;
         res = await API.POSTS_MY(params);
+      } else if (optionsQuery.current.track === "categories") {
+        params.cat_id = optionsQuery.current.cat_id;
+        res = await API.POSTS_CATEGORY(params);
       }
       if (res?.code === 0) {
         setLoadingShow(false);
-        setArticleList(res.data || []);
+        setArticleList([...articleList, ...res.data]);
       } else {
         tools.showToast(res.data.msg);
         setLoadingShow(false);

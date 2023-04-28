@@ -86,4 +86,10 @@ export default {
       url: makeURL("posts", "my"),
       params: params,
     }),
+  // 获取某个分类下文章
+  POSTS_CATEGORY: (params) =>
+    request({
+      url: makeURL('posts', 'category'),
+      params: params,
+    }),
 };
