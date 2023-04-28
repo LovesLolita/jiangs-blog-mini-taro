@@ -34,6 +34,7 @@ const ArticleContents = () => {
       const res = await API.POST_DETAIL(params);
       if (res.code === 0) {
         setArticleContent(res.data.content);
+        console.log(res.data.content);
       } else {
         tools.showToast(res.data.msg);
       }
@@ -49,15 +50,16 @@ const ArticleContents = () => {
 
   return (
     <View>
-      {/* <RichText
+      {/* <View dangerouslySetInnerHTML={{ __html: articleContent }}></View> */}
+      <RichText
         nodes={articleContent}
         style={{
           table: "border-collapse: collapse;",
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      /> */}
-      <mp-html
+      />
+      {/* <mp-html
         className="new-mp-html"
         content={articleContent}
         tagStyle={{
@@ -65,7 +67,7 @@ const ArticleContents = () => {
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      />
+      /> */}
     </View>
   );
 };
