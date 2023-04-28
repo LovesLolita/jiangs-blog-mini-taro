@@ -51,15 +51,15 @@ const ArticleContents = () => {
   return (
     <View>
       {/* <View dangerouslySetInnerHTML={{ __html: articleContent }}></View> */}
-      <RichText
+      {/* <RichText
         nodes={articleContent}
         style={{
           table: "border-collapse: collapse;",
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      />
-      {/* <mp-html
+      /> */}
+      <mp-html
         className="new-mp-html"
         content={articleContent}
         tagStyle={{
@@ -67,7 +67,7 @@ const ArticleContents = () => {
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      /> */}
+      />
     </View>
   );
 };
