@@ -64,10 +64,10 @@ const Ucenter = () => {
   /* 宫格 */
   // 浏览 收藏 点赞 评论 跳转字段
   let myOptions = ["views", "likes", "favorites", "comments"];
-  const girdNavigateTo = (tag) => {
+  const girdNavigateTo = (tag, title) => {
     if (myOptions.indexOf(tag) !== -1) {
       Taro.navigateTo({
-        url: `/pages/articleList/articleList?track=${tag}`,
+        url: `/pages/articleList/articleList?track=${tag}&title=${title}`,
       });
     }
   };
@@ -108,22 +108,22 @@ const Ucenter = () => {
             icon="eye"
             text="我的浏览"
             name="myView"
-            onClick={() => girdNavigateTo("views")}
+            onClick={() => girdNavigateTo("views", '我的浏览')}
           />
           <GridItem
             icon="fabulous"
             text="我的点赞"
-            onClick={() => girdNavigateTo("likes")}
+            onClick={() => girdNavigateTo("likes", '我的点赞')}
           />
           <GridItem
             icon="star"
             text="我的收藏"
-            onClick={() => girdNavigateTo("favorites")}
+            onClick={() => girdNavigateTo("favorites", '我的收藏')}
           />
           <GridItem
             icon="comment"
             text="我的评论"
-            onClick={() => girdNavigateTo("comments")}
+            onClick={() => girdNavigateTo("comments", '我的评论')}
           />
           <GridItem icon="tips" text="关于我们" />
           <GridItem icon="people" text="意见反馈" />

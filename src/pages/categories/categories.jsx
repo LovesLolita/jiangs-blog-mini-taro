@@ -73,7 +73,6 @@ const Categories = () => {
       <ScrollView>
         <View className="categories_list">
           {categoriesList.map((item) => {
-            console.log(item);
             return (
               <View className="categories_item" key={item.id}>
                 <Row>

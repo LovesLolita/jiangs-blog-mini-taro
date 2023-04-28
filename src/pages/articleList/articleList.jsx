@@ -23,18 +23,8 @@ const ArticleList = () => {
   // 生命周期函数--监听页面加载
   useLoad((options) => {
     optionsQuery.current = options;
-    let title = void 0;
-    if (options.track == "views") {
-      title = "我的浏览";
-    } else if (options.track == "likes") {
-      title = "我的点赞";
-    } else if (options.track == "favorites") {
-      title = "我的收藏";
-    } else if (options.track == "comments") {
-      title = "我的评论";
-    }
     Taro.setNavigationBarTitle({
-      title: title || "最新文章",
+      title: options.title || "最新文章",
     });
   });
   /* 页面加载 end */
