@@ -69,7 +69,7 @@ const Hot = () => {
       const res = await API.POSTS_HOT(params);
       if (res.code === 0) {
         setLoadingShow(false);
-        setHotArticlesList(res.data || []);
+        setHotArticlesList([...hotArticlesList, ...res.data]);
       } else {
         setLoadingShow(false);
         tools.showToast(res.data.msg);
