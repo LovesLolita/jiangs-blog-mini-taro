@@ -7,7 +7,8 @@ export default defineAppConfig({
     "pages/ucenter/ucenter",
     "pages/login/login",
     "pages/verify/verify",
-    "pages/articleList/articleList"
+    "pages/articleList/articleList",
+    "pages/articleContents/articleContents"
   ],
   tabBar: {
     color: "#bfbfbf",
