@@ -5,7 +5,6 @@ import tools from "@/common/tools";
 import API from "@/api";
 import { useMount } from "ahooks";
 
-
 import "./articleContents.scss";
 
 const ArticleContents = () => {
@@ -48,18 +47,25 @@ const ArticleContents = () => {
   });
   /* 获取文章内容 end */
 
+  function refaultNode(node) {
+    node = node.replace(/<table/g, '<table class="table"');
+    node = node.replace(/<th/g, '<th class="th"');
+    node = node.replace(/<tr/g, '<tr class="tr"');
+    node = node.replace(/<td/g, '<td class="td"');
+    return node
+  }
   return (
-    <View>
+    <View className="article_contents">
       {/* <View dangerouslySetInnerHTML={{ __html: articleContent }}></View> */}
-      {/* <RichText
-        nodes={articleContent}
+      <RichText
+        nodes={refaultNode(articleContent)}
         style={{
           table: "border-collapse: collapse;",
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      /> */}
-      <mp-html
+      />
+      {/* <mp-html
         className="new-mp-html"
         content={articleContent}
         tagStyle={{
@@ -67,7 +73,7 @@ const ArticleContents = () => {
           th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
           td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
         }}
-      />
+      /> */}
     </View>
   );
 };

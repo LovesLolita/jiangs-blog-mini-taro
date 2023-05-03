@@ -1,8 +1,5 @@
 .article_contents {
-  table {
-    border-collapse: collapse;
-  }
-  th {
+  .th{
     border: 1px solid #ccc;
     padding: 3px 5px;
     text-align: left;
@@ -10,13 +7,16 @@
     text-align: center;
     background: #f1f1f1;
   }
-  td {
+  .table {
+    border-collapse: collapse;	/* 边框合并 */
+  }
+  .td {
     border: 1px solid #ccc;
     padding: 3px 5px;
     text-align: left;
   }
- 
+  
 }
-.pk-menu-0{
+.pk-menu-0 {
   display: none;
 }
