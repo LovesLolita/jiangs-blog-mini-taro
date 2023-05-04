@@ -40,6 +40,9 @@ const ArticleContents = () => {
       };
       const res = await API.POST_DETAIL(params);
       if (res.code === 0) {
+        Taro.setNavigationBarTitle({
+					title: res.data.title
+				});
         setArticleContent(res.data);
       } else {
         tools.showToast(res.data.msg);
@@ -134,9 +137,10 @@ const ArticleContents = () => {
               icon="fabulous"
               iconSize={16}
               block
+              color={articleContent?.user?.islike === 1 ? "#fa2c19" : ""}
               className="page_laud_btn"
             >
-              点个赞
+              {articleContent?.user?.islike === 1 ? "已赞过" : "点个赞"}
             </Button>
           </Col>
           <Col span="8">
@@ -146,22 +150,26 @@ const ArticleContents = () => {
           </Col>
         </Row>
       </View>
-      <View className="page_laud_list">
-        <View className="page_laud_list_title">
-          - 共计2人点赞，包含网站端0人点赞 -
-        </View>
-        <View className="page_laud_list_block">
-          <AvatarGroup span="-4">
-            <Avatar url="https://img12.360buyimg.com/imagetools/jfs/t1/196430/38/8105/14329/60c806a4Ed506298a/e6de9fb7b8490f38.png" />
-            <Avatar color="rgb(245, 106, 0)" bg-color="rgb(253, 227, 207)">
-              L
-            </Avatar>
-            <Avatar color="rgb(245, 106, 0)" bg-color="rgb(253, 227, 207)">
-              U
-            </Avatar>
-          </AvatarGroup>
-        </View>
-      </View>
+      {(() => {
+        if (articleContent?.like_list?.length !== 0) {
+          return (
+            <View className="page_laud_list">
+              <View className="page_laud_list_title">
+                - 共计{articleContent?.like_list?.length || "0"}
+                人点赞，包含网站端
+                {articleContent?.webLikes || "0"}人点赞 -
+              </View>
+              <View className="page_laud_list_block">
+                <AvatarGroup span="-8">
+                  {articleContent?.like_list?.map((item, index) => {
+                    return <Avatar key={index} url={item} />;
+                  })}
+                </AvatarGroup>
+              </View>
+            </View>
+          );
+        }
+      })()}
       <View className="pre_next_view">
         <View className="">
           <Icon
