@@ -41,8 +41,8 @@ const ArticleContents = () => {
       const res = await API.POST_DETAIL(params);
       if (res.code === 0) {
         Taro.setNavigationBarTitle({
-					title: res.data.title
-				});
+          title: res.data.title,
+        });
         setArticleContent(res.data);
       } else {
         tools.showToast(res.data.msg);
@@ -67,6 +67,37 @@ const ArticleContents = () => {
     getArticleContent();
   });
   /* 获取文章内容 end */
+
+  /* 评论 */
+  const [commentCount, setCommentCount] = useState(0); // 评论总数
+  const [commentsList, setCommentsList] = useState([]); // 评论数据
+
+  // 加载评论
+  const getLoadComments = async (refresh) => {
+    try {
+      let offset = 0;
+      if (!refresh) {
+        offset = commentsList.length;
+      }
+      let params = {
+        post_id: articleId.current,
+        offset: offset,
+      };
+      const res = await API.COMMENT_INDEX(params);
+      if(res.code === 0) {
+        setCommentsList([... commentsList,...res.data])
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useMount(() => {
+    getLoadComments();
+  });
+  /* 评论 end */
 
   return (
     <View className="article_contents">
@@ -188,6 +219,14 @@ const ArticleContents = () => {
             name="right"
             size=".8rem"
           ></Icon>
+        </View>
+      </View>
+      <View className="page_cmt_box">
+        <View className="page_cmt_title">
+          评论
+          <Text className="page_cmt_title_count">
+            {parseInt(articleContent?.comment_count) + commentCount}
+          </Text>
         </View>
       </View>
     </View>

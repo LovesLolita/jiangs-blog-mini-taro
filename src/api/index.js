@@ -97,4 +97,10 @@ export default {
       url: makeURL("posts", "detail"),
       params: params,
     }),
+    // 文章评论
+    COMMENT_INDEX: (params) =>
+    request({
+      url: makeURL('comment', 'index'),
+      params: params
+    }),
 };
