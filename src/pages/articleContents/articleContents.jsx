@@ -292,7 +292,7 @@ const ArticleContents = () => {
             <Col span="10">
               <View className="operation_right">
                 <Btn className="operation_item">
-                  <Icon name="star" size="1.2rem"></Icon>
+                  <Icon name="fabulous" size="1.2rem"></Icon>
                 </Btn>
                 <Btn className="operation_item">
                   <Icon name="star" size="1.2rem"></Icon>
