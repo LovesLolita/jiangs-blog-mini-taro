@@ -13,7 +13,8 @@ const config = {
   outputRoot: 'dist',
   plugins: ['@tarojs/plugin-html'],
   sass:{
-    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
+    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";
+           @import "src/assets/icon/font-awesome.scss";`
   },
   alias: {
     '@/store': path.resolve(__dirname, '..', 'src/store'),
