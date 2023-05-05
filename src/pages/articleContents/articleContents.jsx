@@ -45,6 +45,8 @@ const ArticleContents = () => {
           title: res.data.title,
         });
         setArticleContent(res.data);
+        setUserStatus(res.data.user);
+        setLikeList(res.data.like_list);
       } else {
         tools.showToast(res.data.msg);
       }
@@ -68,6 +70,36 @@ const ArticleContents = () => {
     getArticleContent();
   });
   /* 获取文章内容 end */
+
+  /* 点赞 */
+
+  // 点赞 操作
+  const [userStatus, setUserStatus] = useState({});
+  const [likeList, setLikeList] = useState([]);
+
+  const easyLike = async (status) => {
+    try {
+      let params = {
+        post_id: articleId.current,
+      };
+      const res = await API.USER_LIKE(params);
+      if (res.code === 0) {
+        let useData = tools.getUser();
+        let likeIndex = likeList.indexOf(useData.avatar);
+        if (likeIndex > -1) {
+          setLikeList(likeList.filter((item, index) => index !== likeIndex));
+        } else {
+          setLikeList([...likeList, useData.avatar]);
+        }
+        setUserStatus({ ...userStatus, islike: status === 1 ? 0 : 1 });
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  /* 点赞 END */
 
   /* 评论 */
   const commentCount = useRef(0); // 评论总数
@@ -169,10 +201,11 @@ const ArticleContents = () => {
               icon="fabulous"
               iconSize={16}
               block
-              color={articleContent?.user?.islike === 1 ? "#fa2c19" : ""}
+              color={userStatus?.islike === 1 ? "#fa2c19" : ""}
               className="page_laud_btn"
+              onClick={() => easyLike(userStatus?.islike)}
             >
-              {articleContent?.user?.islike === 1 ? "已赞过" : "点个赞"}
+              {userStatus?.islike === 1 ? "已赞过" : "点个赞"}
             </Button>
           </Col>
           <Col span="8">
@@ -183,17 +216,17 @@ const ArticleContents = () => {
         </Row>
       </View>
       {(() => {
-        if (articleContent?.like_list?.length !== 0) {
+        if (likeList.length !== 0) {
           return (
             <View className="page_laud_list">
               <View className="page_laud_list_title">
-                - 共计{articleContent?.like_list?.length || "0"}
+                - 共计{likeList.length || "0"}
                 人点赞，包含网站端
                 {articleContent?.webLikes || "0"}人点赞 -
               </View>
               <View className="page_laud_list_block">
                 <AvatarGroup span="-8">
-                  {articleContent?.like_list?.map((item, index) => {
+                  {likeList.map((item, index) => {
                     return <Avatar key={index} url={item} />;
                   })}
                 </AvatarGroup>
@@ -284,26 +317,26 @@ const ArticleContents = () => {
           );
         })}
       </View>
-        <View className="operation">
-          <Row>
-            <Col span="14">
-              <View className="btn_comment">发表你的评论</View>
-            </Col>
-            <Col span="10">
-              <View className="operation_right">
-                <Btn className="operation_item">
-                  <Icon name="fabulous" size="1.2rem"></Icon>
-                </Btn>
-                <Btn className="operation_item">
-                  <Icon name="star" size="1.2rem"></Icon>
-                </Btn>
-                <Btn className="operation_item">
-                  <Icon name="share" size="1.2rem"></Icon>
-                </Btn>
-              </View>
-            </Col>
-          </Row>
-        </View>
+      <View className="operation">
+        <Row>
+          <Col span="14">
+            <View className="btn_comment">发表你的评论</View>
+          </Col>
+          <Col span="10">
+            <View className="operation_right">
+              <Btn className="operation_item">
+                <Icon name="fabulous" size="1.2rem"></Icon>
+              </Btn>
+              <Btn className="operation_item">
+                <Icon name="star" size="1.2rem"></Icon>
+              </Btn>
+              <Btn className="operation_item">
+                <Icon name="share" size="1.2rem"></Icon>
+              </Btn>
+            </View>
+          </Col>
+        </Row>
+      </View>
     </View>
   );
 };

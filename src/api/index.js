@@ -103,4 +103,10 @@ export default {
       url: makeURL('comment', 'index'),
       params: params
     }),
+    // 用户 点赞文章
+    USER_LIKE: (params) =>
+    request({
+      url: makeURL('user', 'like'),
+      params: params
+    }),
 };
