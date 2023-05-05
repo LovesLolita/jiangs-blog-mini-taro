@@ -1,6 +1,6 @@
 import Taro, { useLoad } from "@tarojs/taro";
 import React, { useRef, useState } from "react";
-import { View, Text, RichText } from "@tarojs/components";
+import { View, Text, RichText, Button as Btn } from "@tarojs/components";
 import {
   Row,
   Col,
@@ -8,6 +8,7 @@ import {
   Button,
   Avatar,
   AvatarGroup,
+  Sticky,
 } from "@nutui/nutui-react-taro";
 import tools from "@/common/tools";
 import API from "@/api";
@@ -270,7 +271,7 @@ const ArticleContents = () => {
                         {itm.approved != 1 ? (
                           <Text className="cmt_replay_time">待审核</Text>
                         ) : null}
-                        {itm.user.is_me==1 ? (
+                        {itm.user.is_me == 1 ? (
                           <Text className="comment_action">删除</Text>
                         ) : null}
                       </View>
@@ -283,6 +284,26 @@ const ArticleContents = () => {
           );
         })}
       </View>
+        <View className="operation">
+          <Row>
+            <Col span="14">
+              <View className="btn_comment">发表你的评论</View>
+            </Col>
+            <Col span="10">
+              <View className="operation_right">
+                <Btn className="operation_item">
+                  <Icon name="star" size="1.2rem"></Icon>
+                </Btn>
+                <Btn className="operation_item">
+                  <Icon name="star" size="1.2rem"></Icon>
+                </Btn>
+                <Btn className="operation_item">
+                  <Icon name="share" size="1.2rem"></Icon>
+                </Btn>
+              </View>
+            </Col>
+          </Row>
+        </View>
     </View>
   );
 };

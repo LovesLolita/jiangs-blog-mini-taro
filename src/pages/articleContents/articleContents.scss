@@ -174,11 +174,57 @@
               margin-left: 20px;
             }
           }
-          .cmt_replay_world{
-            font-size: 24rpx;
+          .cmt_replay_world {
+            font-size: 24px;
             font-weight: 300;
             color: #444;
           }
+        }
+      }
+    }
+  }
+  .operation {
+    padding: 0 20px env(safe-area-inset-bottom);
+    width: 95%;
+    height: 100px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    .btn_comment {
+      height: 64px;
+      background: #ededed;
+      color: #999;
+      border-radius: 16px;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      box-sizing: border-box;
+      padding-top: 0;
+      margin-left: 10px;
+    }
+    .operation_right {
+      width: 100%;
+      display: flex;
+      justify-content: start;
+      padding-top: 0;
+      .operation_item {
+        height: 64px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: none;
+        background: none;
+        &::after {
+          border: none;
         }
       }
     }
