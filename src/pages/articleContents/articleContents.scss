@@ -125,5 +125,62 @@
         margin-left: 30px;
       }
     }
+    .page_cmt_content {
+      padding: 20px 0;
+      padding-left: 80px;
+      border-top: 1px solid #eee;
+      overflow: hidden;
+      .page_cmt_avatar {
+        float: left;
+        margin-left: -80px;
+        height: 64px;
+        width: 64px;
+      }
+      .page_cmt_head {
+        font-size: 28px;
+        font-weight: 500;
+        color: #333;
+        .page_cmt_time {
+          font-size: 22px;
+          font-weight: 400;
+          color: #888;
+          margin-left: 20px;
+        }
+        .comment_action {
+          margin-left: 20px;
+        }
+      }
+      .page_cmt_text {
+        font-size: 26px;
+        font-weight: 300;
+        color: #444;
+      }
+      .page_cmt_replay {
+        margin-top: 20px;
+        border-radius: 30px;
+        padding: 0 20px;
+        background: #f6f6f6;
+        .cmt_replay_box {
+          padding: 20px 0;
+          .cmt_replay_name {
+            padding-bottom: 10px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+            .cmt_replay_time {
+              font-size: 20px;
+              font-weight: 400;
+              color: #bbb;
+              margin-left: 20px;
+            }
+          }
+          .cmt_replay_world{
+            font-size: 24rpx;
+            font-weight: 300;
+            color: #444;
+          }
+        }
+      }
+    }
   }
 }

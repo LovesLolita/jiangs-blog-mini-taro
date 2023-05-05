@@ -69,10 +69,10 @@ const ArticleContents = () => {
   /* 获取文章内容 end */
 
   /* 评论 */
-  const [commentCount, setCommentCount] = useState(0); // 评论总数
+  const commentCount = useRef(0); // 评论总数
   const [commentsList, setCommentsList] = useState([]); // 评论数据
 
-  // 加载评论
+  // 加载获取评论
   const getLoadComments = async (refresh) => {
     try {
       let offset = 0;
@@ -84,8 +84,8 @@ const ArticleContents = () => {
         offset: offset,
       };
       const res = await API.COMMENT_INDEX(params);
-      if(res.code === 0) {
-        setCommentsList([...commentsList,...res.data])
+      if (res.code === 0) {
+        setCommentsList([...commentsList, ...res.data]);
       } else {
         tools.showToast(res.data.msg);
       }
@@ -225,9 +225,63 @@ const ArticleContents = () => {
         <View className="page_cmt_title">
           评论
           <Text className="page_cmt_title_count">
-            {parseInt(articleContent?.comment_count) + commentCount}
+            {parseInt(articleContent?.comment_count) + commentCount.current}
           </Text>
         </View>
+        {commentsList.map((item, index) => {
+          return (
+            <View className="page_cmt_content" key={index}>
+              <View className="page_cmt_avatar">
+                {(() => {
+                  if (item?.user?.avatar?.length > 0) {
+                    return <Avatar size="small" icon={item.user.avatar} />;
+                  } else {
+                    return (
+                      <Avatar
+                        size="small"
+                        bgColor="rgb(253, 227, 207)"
+                        color="rgb(245, 106, 0)"
+                      >
+                        {item?.user?.name?.charAt(0) || "N"}
+                      </Avatar>
+                    );
+                  }
+                })()}
+              </View>
+              <View className="page_cmt_head">
+                <Text>{item.user.name}</Text>
+                <Text className="page_cmt_time">{item.time}</Text>
+                {item.approved != 1 ? (
+                  <Text className="page_cmt_time">待审核</Text>
+                ) : null}
+                <Text className="comment_action">回复</Text>
+                {item.user.is_me == 1 ? (
+                  <Text className="comment_action">删除</Text>
+                ) : null}
+              </View>
+              <View className="page_cmt_text">{item.content}</View>
+              <View className="page_cmt_replay">
+                {item?.replys.map((itm, idx) => {
+                  return (
+                    <View className="cmt_replay_box" key={idx}>
+                      <View className="cmt_replay_name">
+                        <Text>{itm.user.name}</Text>
+                        <Text className="cmt_replay_time">{itm.time}</Text>
+                        {itm.approved != 1 ? (
+                          <Text className="cmt_replay_time">待审核</Text>
+                        ) : null}
+                        {itm.user.is_me==1 ? (
+                          <Text className="comment_action">删除</Text>
+                        ) : null}
+                      </View>
+                      <View className="cmt_replay_world">{itm.content}</View>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          );
+        })}
       </View>
     </View>
   );
