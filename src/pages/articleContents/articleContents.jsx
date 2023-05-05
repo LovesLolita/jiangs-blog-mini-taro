@@ -85,7 +85,7 @@ const ArticleContents = () => {
       };
       const res = await API.COMMENT_INDEX(params);
       if(res.code === 0) {
-        setCommentsList([... commentsList,...res.data])
+        setCommentsList([...commentsList,...res.data])
       } else {
         tools.showToast(res.data.msg);
       }
