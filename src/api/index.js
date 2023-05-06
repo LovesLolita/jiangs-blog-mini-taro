@@ -121,4 +121,10 @@ export default {
       url: makeURL('comment', 'add'),
       params: params
     }),
+    // 删除评论
+    COMMENT_DELETE: (params) =>
+    request({
+      url: makeURL('comment', 'delete'),
+      params: params
+    }),
 };

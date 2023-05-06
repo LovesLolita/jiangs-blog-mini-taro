@@ -157,6 +157,22 @@ const ArticleContents = () => {
     }
   };
 
+  // 评论删除
+  const commentDelete = async(id) => {
+    try {
+      let params = {
+        comment_id: id
+      }
+      const res = await API.COMMENT_DELETE(params)
+      if(res.code === 0){
+        getLoadComments('refresh')
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useMount(() => {
     getLoadComments();
   });
@@ -360,7 +376,7 @@ const ArticleContents = () => {
                 ) : null}
                 <Text className="comment_action">回复</Text>
                 {item.user.is_me == 1 ? (
-                  <Text className="comment_action">删除</Text>
+                  <Text className="comment_action" onClick={commentDelete}>删除</Text>
                 ) : null}
               </View>
               <View className="page_cmt_text">{item.content}</View>
