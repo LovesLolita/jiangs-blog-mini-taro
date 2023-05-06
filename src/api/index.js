@@ -109,4 +109,16 @@ export default {
       url: makeURL('user', 'like'),
       params: params
     }),
+    // 用户 收藏文章
+    USER_FAVORITE: (params) =>
+    request({
+      url: makeURL('user', 'favorite'),
+      params: params
+    }),
+    // 添加评论
+    COMMENT_ADD: (params) =>
+    request({
+      url: makeURL('comment', 'add'),
+      params: params
+    }),
 };

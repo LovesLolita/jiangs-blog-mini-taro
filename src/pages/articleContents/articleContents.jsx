@@ -1,6 +1,12 @@
 import Taro, { useLoad } from "@tarojs/taro";
-import React, { useRef, useState } from "react";
-import { View, Text, RichText, Button as Btn } from "@tarojs/components";
+import React, { useRef, useState, Fragment } from "react";
+import {
+  View,
+  Text,
+  RichText,
+  Button as Btn,
+  Textarea,
+} from "@tarojs/components";
 import {
   Row,
   Col,
@@ -8,11 +14,11 @@ import {
   Button,
   Avatar,
   AvatarGroup,
-  Sticky,
+  Popup,
 } from "@nutui/nutui-react-taro";
 import tools from "@/common/tools";
 import API from "@/api";
-import { useMount, useSetState } from "ahooks";
+import { useMount } from "ahooks";
 
 import "./articleContents.scss";
 
@@ -99,9 +105,28 @@ const ArticleContents = () => {
       console.log(err);
     }
   };
+
+  // 文章收藏
+  const changeFavorite = async (status) => {
+    try {
+      let params = {
+        post_id: articleId.current,
+      };
+      const res = await API.USER_FAVORITE(params);
+      if (res.code === 0) {
+        setUserStatus({ ...userStatus, isfavorite: status === 1 ? 0 : 1 });
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   /* 点赞 END */
 
-  /* 评论 */
+  /* 评论列表 */
+  const comment_id = useRef(0)
   const commentCount = useRef(0); // 评论总数
   const [commentsList, setCommentsList] = useState([]); // 评论数据
 
@@ -118,7 +143,12 @@ const ArticleContents = () => {
       };
       const res = await API.COMMENT_INDEX(params);
       if (res.code === 0) {
-        setCommentsList([...commentsList, ...res.data]);
+        if(refresh){
+          setCommentsList(res.data);
+        } else {
+          setCommentsList([...commentsList, ...res.data]);
+        }
+       
       } else {
         tools.showToast(res.data.msg);
       }
@@ -130,7 +160,47 @@ const ArticleContents = () => {
   useMount(() => {
     getLoadComments();
   });
-  /* 评论 end */
+  /* 评论列表 end */
+
+  /* 发布评论 */
+  const [showBottom, setShowBottom] = useState(true);
+  const [remarkValue, updateRemarkValue] = useState("");
+
+  // 输入
+  const changeRemark = (e) => {
+    updateRemarkValue(e.target.value);
+  };
+
+  const confirm_remark = async() => {
+    try {
+      if (remarkValue.trim() === "") {
+        Taro.showToast({
+          icon: "none",
+          title: "请输入内容",
+        });
+        return;
+      }
+      let params = {
+        post_id: articleId.current,
+        parent_id: comment_id.current,
+        content: remarkValue
+      };
+      const res = await API.COMMENT_ADD(params)
+      if(res.code === 0){
+        setShowBottom(false)
+        getLoadComments('refresh')
+      } else {
+        tools.showToast(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  function closePopup() {
+    setShowBottom(false);
+  }
+  /* 发布评论 end */
 
   return (
     <View className="article_contents">
@@ -320,23 +390,76 @@ const ArticleContents = () => {
       <View className="operation">
         <Row>
           <Col span="14">
-            <View className="btn_comment">发表你的评论</View>
+            <View
+              className="btn_comment"
+              onClick={() => {
+                setShowBottom(true);
+              }}
+            >
+              发表你的评论
+            </View>
           </Col>
           <Col span="10">
             <View className="operation_right">
-              <Btn className="operation_item">
-                <Icon name="fabulous" size="1.2rem"></Icon>
+              <Btn
+                className="operation_item"
+                onClick={() => easyLike(userStatus?.islike)}
+              >
+                <Icon
+                  name="fabulous"
+                  size="1.2rem"
+                  color={userStatus?.islike === 1 ? "#fa2c19" : ""}
+                ></Icon>
               </Btn>
-              <Btn className="operation_item">
-                <Icon name="star" size="1.2rem"></Icon>
+              <Btn
+                className="operation_item"
+                onClick={() => changeFavorite(userStatus?.isfavorite)}
+              >
+                <Icon
+                  name="star"
+                  size="1.2rem"
+                  color={userStatus?.isfavorite === 1 ? "#fa2c19" : ""}
+                ></Icon>
               </Btn>
-              <Btn className="operation_item">
+              <Btn className="operation_item" open-type="share">
                 <Icon name="share" size="1.2rem"></Icon>
               </Btn>
             </View>
           </Col>
         </Row>
       </View>
+      <Fragment>
+        <Popup
+          visible={showBottom}
+          style={{ height: "40%" }}
+          position="bottom"
+          onClose={() => {
+            setShowBottom(false);
+          }}
+        >
+          <View className="popup_view">
+            <View className="Popup_top">
+              <Text className="close_btn" onClick={closePopup}>
+                取消
+              </Text>
+              <Text className="popup_title">发布评论</Text>
+              <Text className="confirm_btn" onClick={confirm_remark}>
+                发布
+              </Text>
+            </View>
+            <View className="remark">
+              <Textarea
+                value={remarkValue}
+                placeholder="请输入发布内容"
+                className="remark_TextArea"
+                maxlength={200}
+                autoFocus
+                onInput={changeRemark}
+              />
+            </View>
+          </View>
+        </Popup>
+      </Fragment>
     </View>
   );
 };

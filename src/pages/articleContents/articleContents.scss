@@ -229,4 +229,45 @@
       }
     }
   }
+  .popup_view {
+    height: 100%;
+    background-color: #fff;
+    .Popup_top {
+      display: flex;
+      padding: 30px 35px;
+      justify-content: space-between;
+      background-color: #f7f8fa;
+      .close_btn {
+        color: grey;
+        flex: 1;
+      }
+      .popup_title {
+        color: #1a1a1a;
+        flex: 1;
+        font-size: 32px;
+        font-weight: 600;
+        overflow: hidden;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .confirm_btn {
+        color: #fa2c19;
+        flex: 1;
+        text-align: end;
+      }
+    }
+    .remark {
+      display: flex;
+      height: 450px;
+      justify-content: center;
+
+      .remark_TextArea {
+        width: 90%;
+        height: 400px;
+        padding: 20px 40px;
+        // background-color: #ccc;
+      }
+    }
+  }
 }
