@@ -72,6 +72,68 @@ const Ucenter = () => {
     }
   };
 
+  // 扫码登入
+  const openPhotoScanCode = () => {
+    if (!tools.getUser()) {
+      Taro.navigateTo({
+        url: "/pages/login/login",
+      });
+      return;
+    }
+    Taro.scanCode({
+      success: (res) => {
+        console.log(res);
+        try {
+          const result = JSON.parse(res.result);
+          if (result.type !== "qrcodelogin") {
+            throw new error();
+          }
+          qrCodeLogin(result.code);
+        } catch (e) {
+          Taro.showToast({
+            title: "二维码无效！",
+            icon: "none",
+          });
+        }
+      },
+      fail: (res) => {
+        Taro.showToast({
+          title: "扫码失败",
+          icon: "none",
+        });
+      },
+    });
+  };
+
+  const qrCodeLogin = async (qrCodeSrt) => {
+    try {
+      const { code } = await Taro.login();
+      if (code) {
+        let params = {
+          code: code,
+          channel: "qrcodelogin",
+          nickname: "微信用户",
+          qrcodeStr: qrCodeSrt,
+        };
+        const res = await API.USER_LOGIN(params);
+        if (res.code === 0) {
+          Taro.showToast({
+            title: "登录成功！",
+            icon: "none",
+          });
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      if (err.msg) {
+        Taro.showToast({
+          title: err.msg,
+          icon: "none",
+        });
+      }
+    }
+  };
+
   // 退出登入
   const clearCache = () => {
     Taro.showModal({
@@ -146,7 +208,7 @@ const Ucenter = () => {
             onClick={() => girdNavigateTo("comments", "我的评论")}
           />
           <GridItem open-type="feedback" icon="tips" text="关于我们" />
-          <GridItem icon="scan2" text="扫码登入" />
+          <GridItem icon="scan2" text="扫码登入" onClick={openPhotoScanCode} />
         </Grid>
       </View>
       <View className="out_login">
