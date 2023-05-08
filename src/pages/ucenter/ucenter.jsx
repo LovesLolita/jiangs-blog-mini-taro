@@ -104,7 +104,7 @@ const Ucenter = () => {
       },
     });
   };
-
+  //  扫码后登入
   const qrCodeLogin = async (qrCodeSrt) => {
     try {
       const { code } = await Taro.login();
