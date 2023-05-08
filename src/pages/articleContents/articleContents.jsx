@@ -284,7 +284,7 @@ const ArticleContents = () => {
             tagStyle={{
               table: "border-collapse: collapse;",
               th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
-              td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
+              td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;"
             }}
           />
           {/* <RichText
