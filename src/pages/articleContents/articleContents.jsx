@@ -160,7 +160,7 @@ const ArticleContents = () => {
   const commentDelete = (item) => {
     try {
       console.log(item);
-      debugger
+      debugger;
       Taro.showModal({
         title: "提示",
         content: "确定要删除吗？",
@@ -277,20 +277,20 @@ const ArticleContents = () => {
         </View>
       </View>
       <View className="article_text">
-        {/* <mp-html
-        className="new-mp-html"
-        content={articleContent}
-        tagStyle={{
-          table: "border-collapse: collapse;",
-          th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
-          td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
-        }}
-      /> */}
         <View className="article_rich_text">
-          <RichText
+          <mp-html
+            className="new-mp-html"
+            content={articleContent.content}
+            tagStyle={{
+              table: "border-collapse: collapse;",
+              th: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;background-color: #f1f1f1;text-align: center;background: #f1f1f1;",
+              td: "border: 1px solid #ccc;padding: 3px 5px;text-align: left;",
+            }}
+          />
+          {/* <RichText
             nodes={resultNode(articleContent?.content)}
             style={{ background: "#ccc" }}
-          />
+          /> */}
         </View>
 
         <View class="text_end">
