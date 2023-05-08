@@ -1,5 +1,5 @@
 import Taro, { useLoad } from "@tarojs/taro";
-import React, { useRef, useState, Fragment } from "react";
+import React, { useRef, useState, Fragment, useEffect } from "react";
 import {
   View,
   Text,
@@ -126,7 +126,7 @@ const ArticleContents = () => {
   /* 点赞 END */
 
   /* 评论列表 */
-  const comment_id = useRef(0)
+  const comment_id = useRef(0);
   const commentCount = useRef(0); // 评论总数
   const [commentsList, setCommentsList] = useState([]); // 评论数据
 
@@ -143,12 +143,11 @@ const ArticleContents = () => {
       };
       const res = await API.COMMENT_INDEX(params);
       if (res.code === 0) {
-        if(refresh){
+        if (refresh) {
           setCommentsList(res.data);
         } else {
           setCommentsList([...commentsList, ...res.data]);
         }
-       
       } else {
         tools.showToast(res.data.msg);
       }
@@ -158,28 +157,43 @@ const ArticleContents = () => {
   };
 
   // 评论删除
-  const commentDelete = async(id) => {
+  const commentDelete = (item) => {
     try {
-      let params = {
-        comment_id: id
-      }
-      const res = await API.COMMENT_DELETE(params)
-      if(res.code === 0){
-        getLoadComments('refresh')
-      } else {
-        tools.showToast(res.data.msg);
-      }
+      console.log(item);
+      debugger
+      Taro.showModal({
+        title: "提示",
+        content: "确定要删除吗？",
+        success: async () => {
+          let params = {
+            comment_id: item.id,
+          };
+          const res = await API.COMMENT_DELETE(params);
+          if (res.code === 0) {
+            getLoadComments("refresh");
+          } else {
+            tools.showToast(res.data.msg);
+          }
+        },
+      });
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  // 评论回复点击操作
+  const commentAction = (item) => {
+    comment_id.current = item.id;
+    setShowBottom(true);
+  };
+
   useMount(() => {
     getLoadComments();
   });
   /* 评论列表 end */
 
   /* 发布评论 */
-  const [showBottom, setShowBottom] = useState(true);
+  const [showBottom, setShowBottom] = useState(false);
   const [remarkValue, updateRemarkValue] = useState("");
 
   // 输入
@@ -187,7 +201,7 @@ const ArticleContents = () => {
     updateRemarkValue(e.target.value);
   };
 
-  const confirm_remark = async() => {
+  const confirm_remark = async () => {
     try {
       if (remarkValue.trim() === "") {
         Taro.showToast({
@@ -199,12 +213,12 @@ const ArticleContents = () => {
       let params = {
         post_id: articleId.current,
         parent_id: comment_id.current,
-        content: remarkValue
+        content: remarkValue,
       };
-      const res = await API.COMMENT_ADD(params)
-      if(res.code === 0){
-        setShowBottom(false)
-        getLoadComments('refresh')
+      const res = await API.COMMENT_ADD(params);
+      if (res.code === 0) {
+        setShowBottom(false);
+        getLoadComments("refresh");
       } else {
         tools.showToast(res.data.msg);
       }
@@ -216,6 +230,18 @@ const ArticleContents = () => {
   function closePopup() {
     setShowBottom(false);
   }
+
+  function resetPopupData() {
+    comment_id.current = 0;
+    updateRemarkValue("");
+  }
+
+  // 关闭状态 回复ID清0
+  useEffect(() => {
+    if (!showBottom) {
+      resetPopupData();
+    }
+  }, [showBottom]);
   /* 发布评论 end */
 
   return (
@@ -374,9 +400,19 @@ const ArticleContents = () => {
                 {item.approved != 1 ? (
                   <Text className="page_cmt_time">待审核</Text>
                 ) : null}
-                <Text className="comment_action">回复</Text>
+                <Text
+                  className="comment_action"
+                  onClick={() => commentAction(item)}
+                >
+                  回复
+                </Text>
                 {item.user.is_me == 1 ? (
-                  <Text className="comment_action" onClick={commentDelete}>删除</Text>
+                  <Text
+                    className="comment_action"
+                    onClick={() => commentDelete(item)}
+                  >
+                    删除
+                  </Text>
                 ) : null}
               </View>
               <View className="page_cmt_text">{item.content}</View>
@@ -391,7 +427,12 @@ const ArticleContents = () => {
                           <Text className="cmt_replay_time">待审核</Text>
                         ) : null}
                         {itm.user.is_me == 1 ? (
-                          <Text className="comment_action">删除</Text>
+                          <Text
+                            className="comment_action"
+                            onClick={() => commentDelete(item)}
+                          >
+                            删除
+                          </Text>
                         ) : null}
                       </View>
                       <View className="cmt_replay_world">{itm.content}</View>
