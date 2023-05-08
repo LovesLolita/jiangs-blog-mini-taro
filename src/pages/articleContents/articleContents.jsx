@@ -321,7 +321,7 @@ const ArticleContents = () => {
             </Button>
           </Col>
           <Col span="8">
-            <Button icon="share" iconSize={16} block className="page_laud_btn">
+            <Button icon="share" iconSize={16} block className="page_laud_btn" open-type="share">
               海报分享
             </Button>
           </Col>
