@@ -88,6 +88,13 @@ const Hot = () => {
     getHotArticles();
   });
 
+  // 跳转文章
+  const ArticleToPage = (item) => {
+    Taro.navigateTo({
+      url: "/pages/articleContents/articleContents?post_id=" + item.id,
+    });
+  };
+
   const hotArticlesDom = () => {
     if (hotArticlesList.length === 0) {
       return (
@@ -111,7 +118,11 @@ const Hot = () => {
           <View className="scroll_view">
             {hotArticlesList.map((item, index) => {
               return (
-                <View className="articles_content" key={index}>
+                <View
+                  className="articles_content"
+                  key={index}
+                  onClick={() => ArticleToPage(item)}
+                >
                   <Row>
                     <Col span="14">
                       <View className="left_text_box">

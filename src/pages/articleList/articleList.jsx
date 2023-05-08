@@ -87,6 +87,14 @@ const ArticleList = () => {
       );
     }
   };
+
+   // 跳转文章
+   const ArticleToPage = (item) => {
+    Taro.navigateTo({
+      url: "/pages/articleContents/articleContents?post_id=" + item.id,
+    });
+  };
+
   // 页面触底动作
   useReachBottom(() => {
     getArticleList(false);
@@ -106,7 +114,7 @@ const ArticleList = () => {
         <View className={style.categories_list}>
           {articleList.map((item) => {
             return (
-              <View className={style.categories_item} key={item.id}>
+              <View className={style.categories_item} key={item.id} onClick={() => ArticleToPage(item)}>
                 <Row>
                   <Col span="16">
                     <View className={style.right_text}>
