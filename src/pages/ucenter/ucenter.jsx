@@ -71,6 +71,26 @@ const Ucenter = () => {
       });
     }
   };
+
+  // 退出登入
+  const clearCache = () => {
+    Taro.showModal({
+      title: "提示",
+      content: "确定需要退出登入吗",
+      success: (res) => {
+        if (res.confirm) {
+          Taro.clearStorageSync();
+          Taro.showToast({
+            icon: "none",
+            title: "退出成功",
+          });
+          Taro.reLaunch({
+            url: "/pages/ucenter/ucenter",
+          });
+        }
+      },
+    });
+  };
   /* 宫格end */
 
   return (
@@ -108,32 +128,35 @@ const Ucenter = () => {
             icon="eye"
             text="我的浏览"
             name="myView"
-            onClick={() => girdNavigateTo("views", '我的浏览')}
+            onClick={() => girdNavigateTo("views", "我的浏览")}
           />
           <GridItem
             icon="fabulous"
             text="我的点赞"
-            onClick={() => girdNavigateTo("likes", '我的点赞')}
+            onClick={() => girdNavigateTo("likes", "我的点赞")}
           />
           <GridItem
             icon="star"
             text="我的收藏"
-            onClick={() => girdNavigateTo("favorites", '我的收藏')}
+            onClick={() => girdNavigateTo("favorites", "我的收藏")}
           />
           <GridItem
             icon="comment"
             text="我的评论"
-            onClick={() => girdNavigateTo("comments", '我的评论')}
+            onClick={() => girdNavigateTo("comments", "我的评论")}
           />
-          <GridItem icon="tips" text="关于我们" />
-          <GridItem icon="people" text="意见反馈" />
-          <GridItem icon="service" text="在线客服" />
+          <GridItem open-type="feedback" icon="tips" text="关于我们" />
           <GridItem icon="scan2" text="扫码登入" />
         </Grid>
       </View>
       <View className="out_login">
         {user ? (
-          <Button size="large" type="primary" color="#7232dd">
+          <Button
+            size="large"
+            type="primary"
+            color="#7232dd"
+            onClick={clearCache}
+          >
             退出登入
           </Button>
         ) : null}
