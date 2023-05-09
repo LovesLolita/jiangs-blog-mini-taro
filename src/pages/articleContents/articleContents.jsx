@@ -320,7 +320,7 @@ const ArticleContents = () => {
               {userStatus?.islike === 1 ? "已赞过" : "点个赞"}
             </Button>
           </Col>
-          <Col span="8">
+          <Col span="10">
             <Button icon="share" iconSize={16} block className="page_laud_btn" open-type="share">
               海报分享
             </Button>
