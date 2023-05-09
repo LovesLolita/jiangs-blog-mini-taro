@@ -42,7 +42,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-          selectorBlackList: ['nut-']
+          selectorBlackList: ['nut-', 'hl-']
         }
       },
       url: {
