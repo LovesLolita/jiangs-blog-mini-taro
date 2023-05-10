@@ -159,8 +159,6 @@ const ArticleContents = () => {
   // 评论删除
   const commentDelete = (item) => {
     try {
-      console.log(item);
-      debugger;
       Taro.showModal({
         title: "提示",
         content: "确定要删除吗？",
