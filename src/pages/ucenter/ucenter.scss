@@ -30,11 +30,14 @@
         transform: translate(-50%, 50%);
       }
       .user_name{
+        position: absolute;
+        left: 50%;
         margin-top: 5px;
         text-align: center;
         font-size: 30px;
         color: #666666;
         font-weight: 600;
+        transform: translateX(-50%);
       }
     }
   }
