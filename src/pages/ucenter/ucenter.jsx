@@ -134,6 +134,41 @@ const Ucenter = () => {
     }
   };
 
+  // 订阅信息
+  const subscriptionMessage = () => {
+    // 获取用户的当前设置，判断是否点击了“总是保持以上，不在询问”
+    Taro.getSetting({
+      // withSubscriptions:true,  //是否获取用户订阅消息的订阅状态，默认false不返回
+      success(res) {
+        if (res.authSetting["scope.subscribeMessage"]) {
+          //用户点击了“总是保持以上，不再询问”
+          Taro.openSetting({
+            // 打开设置页
+            success(res) {
+              console.log(res.authSetting, "设置");
+            },
+          });
+        } else {
+          // 用户没有点击“总是保持以上，不再询问”则每次都会调起订阅消息
+
+          Taro.requestSubscribeMessage({
+            tmplIds: [
+              "ZNagCd5-99wAjjFrJjp0QyVV_TL7f90X6VeZ1IE83rE",
+              "TKMRssS0R1ehkh8JN_XCRYcSggMD4_4FpH92nJC2PMk",
+              "ne8Sp81kxdlpR49Pq_q-MNfHNxm0m1OsMijxa0cHHBU",
+            ],
+            success(res) {
+              console.log(res);
+            },
+            fail: (res) => {
+              console.log(res);
+            },
+          });
+        }
+      },
+    });
+  };
+
   // 退出登入
   const clearCache = () => {
     Taro.showModal({
@@ -209,6 +244,11 @@ const Ucenter = () => {
           />
           <GridItem open-type="feedback" icon="tips" text="关于我们" />
           <GridItem icon="scan2" text="扫码登入" onClick={openPhotoScanCode} />
+          <GridItem
+            icon="heart1"
+            text="订阅模板信息"
+            onClick={subscriptionMessage}
+          />
         </Grid>
       </View>
       <View className="out_login">
